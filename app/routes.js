@@ -1,18 +1,25 @@
 import path from 'path';
+import express from'express';
+
 module.exports = function(app, passport) {
+
   app.get('/', (req, res) => {
-    res.sendFile(path.resolve('./', 'index.html'));
+    res.render('index', { message: req.flash('signupMessage') });
   });
 
-  app.get('/loginpage', (req, res) => {
-    res.sendFile(path.resolve('./', 'index.html'));
+  app.get('/login', (req, res) => {
+    res.render('index', { message: req.flash('loginMessage') });
+  });
+
+  app.get('/signup', (req, res) => {
+    res.render('index', { message: req.flash('signupMessage') });
   });
 
   app.get('/logout', (req, res) => {
       if(req.user){
       }
       req.logout();
-      res.redirect('/');
+      res.redirect('/login');
   });
 
   app.post('/signup', function(req, res, next) {
@@ -22,6 +29,7 @@ module.exports = function(app, passport) {
       }
 
       if(!user) {
+        res.redirect('/');
         return res.send({ success : false, message : 'authentication failed' });
       }
 
@@ -48,20 +56,20 @@ module.exports = function(app, passport) {
         if(loginErr) {
           return next(loginErr);
         }
-        return res.send(JSON.stringify({ success : true, message : 'authentication succeeded'}));
+          return res.send(JSON.stringify({ success : true, message : 'authentication succeeded'}));
       });
     })(req, res, next);
   });
 
-    app.get('/profile', isLoggedIn, function(req, res) {
-        res.send('you are logged in');
+    app.get('*', isLoggedIn, function(req, res) {
+      res.render('index');
     });
 };
 
 function isLoggedIn(req, res, next) {
 
-    if (req.isAuthenticated())
-        return next();
-
-    res.redirect('/');
+    if (req.isAuthenticated()){
+      return next();
+    }
+    res.redirect('/login');
 }

@@ -3,12 +3,10 @@ import User from '../models/user';
 
 let LocalStrategy = passportLocal.Strategy;
 
-
-
 export default function(passport) {
 
   passport.serializeUser(function(user, done) {
-      done(null, user.id);
+    done(null, user.id);
   });
 
   passport.deserializeUser(function(id, done) {
@@ -54,7 +52,6 @@ export default function(passport) {
       passReqToCallback : true
   },
   function(req, email, password, done) {
-
       User.findOne({ 'local.email' :  email }, function(err, user) {
           if (err) {
             return done(err);
