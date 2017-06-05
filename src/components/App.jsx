@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import LoginForm from './LoginForm.jsx';
-import SignupForm from './SignupForm.jsx';
+import connectedLoginForm from './LoginForm.jsx';
+import connectedSignupForm from './SignupForm.jsx';
 import User from './User.jsx';
 
 export default class App extends Component {
@@ -9,8 +9,8 @@ export default class App extends Component {
     return (
       <Router>
         <div>
-          <Route exact path='/' component={SignupForm} />
-          <Route path='/login' component={LoginForm} />
+          <Route exact path='/' component={connectedSignupForm} />
+          <Route path='/login' component={connectedLoginForm} />
           <Route path='/users/:id' component={User} />
         </div>
       </Router>

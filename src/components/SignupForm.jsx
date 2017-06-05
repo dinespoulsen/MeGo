@@ -1,7 +1,10 @@
 import React from 'react';
 import toastr from 'toastr';
+import * as actionCreators from '../actionCreators'
+import {connect} from 'react-redux'
+import { Map } from 'immutable';
 
-export default class SignupForm extends React.Component {
+class SignupForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,7 +48,9 @@ export default class SignupForm extends React.Component {
 
   handleSignupResult(result) {
     if(result.success === true){
-      this.props.history.push('/users/test');
+      let user = Map({email: this.state.email});
+      this.props.addUser(user);
+      this.props.history.push('/users/' + result.userId);
       toastr.success('Great you signed up!!!!');
     }
     else {
@@ -73,3 +78,5 @@ export default class SignupForm extends React.Component {
     );
   }
 }
+
+export default connect(null, actionCreators)(SignupForm)

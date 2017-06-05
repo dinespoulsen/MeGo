@@ -29,14 +29,14 @@ module.exports = function(app, passport) {
       }
 
       if(!user) {
-        return res.send({ success : false, message : info });
+        return res.send({ success: false, message: info });
       }
 
       req.login(user, loginErr => {
         if(loginErr) {
           return next(loginErr);
         }
-        return res.send(JSON.stringify({ success : true, message : 'authentication succeeded'}));
+        return res.send(JSON.stringify({ success: true, message: info, userId: user.id }));
       });
     })(req, res, next);
   });
@@ -48,21 +48,35 @@ module.exports = function(app, passport) {
       }
 
       if(!user) {
-        return res.send({ success : false, message : info });
+        return res.send({ success: false, message: info });
       }
 
       req.login(user, loginErr => {
         if(loginErr) {
           return next(loginErr);
         }
-          return res.send(JSON.stringify({ success : true, message : info}));
+          return res.send(JSON.stringify({ success: true, message: info, userId: user.id }));
       });
     })(req, res, next);
   });
 
-    app.get('*', isLoggedIn, function(req, res) {
-      res.render('index');
-    });
+  app.get('/users/:id', function(req, res, next) {
+    if(req.user) {
+      if(req.user.id === req.params.id) {
+        res.render('index');
+      }
+      else {
+        res.redirect('/login');
+      }
+    }
+    else {
+      res.redirect('/login');
+    }
+  });
+
+  app.get('*', isLoggedIn, function(req, res) {
+    res.render('index');
+  });
 };
 
 function isLoggedIn(req, res, next) {

@@ -1,7 +1,10 @@
 import React from 'react'
 import toastr from 'toastr'
+import * as actionCreators from '../actionCreators'
+import {connect} from 'react-redux'
+import { Map } from 'immutable';
 
-export default class LoginForm extends React.Component {
+class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -49,7 +52,9 @@ export default class LoginForm extends React.Component {
 
   handleLoginResult(result) {
     if(result.success === true){
-      this.props.history.push('/users/test');
+      let user = Map({email: this.state.email});
+      this.props.addUser(user);
+      this.props.history.push('/users/' + result.userId);
       toastr.success('Great you got logged in!!!!');
     }
     else {
@@ -68,7 +73,6 @@ export default class LoginForm extends React.Component {
       errorMessagePassword : ''
     });
   }
-
 
   render() {
     return (
@@ -90,3 +94,5 @@ export default class LoginForm extends React.Component {
     );
   }
 }
+
+export default connect(null, actionCreators)(LoginForm)

@@ -1,6 +1,6 @@
-export function addFlashMessage(message) {
+export function addUser(user) {
   return {
-    type: 'ADD_FLASH_MESSAGE',
-    message: message
+    type: 'ADD_USER',
+    user: user
   };
 }
