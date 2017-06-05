@@ -17585,23 +17585,28 @@ var LoginForm = function (_React$Component) {
 
     _this.state = {
       email: '',
-      password: ''
+      password: '',
+      errorMessageEmail: '',
+      errorMessagePassword: ''
     };
     _this.handleEmailChange = _this.handleEmailChange.bind(_this);
     _this.handleLoginResult = _this.handleLoginResult.bind(_this);
     _this.handlePasswordChange = _this.handlePasswordChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.clearErrorMessages = _this.clearErrorMessages.bind(_this);
     return _this;
   }
 
   _createClass(LoginForm, [{
     key: 'handleEmailChange',
     value: function handleEmailChange(event) {
+      this.clearErrorMessages();
       this.setState({ email: event.target.value });
     }
   }, {
     key: 'handlePasswordChange',
     value: function handlePasswordChange(event) {
+      this.clearErrorMessages();
       this.setState({ password: event.target.value });
     }
   }, {
@@ -17610,6 +17615,7 @@ var LoginForm = function (_React$Component) {
       var _this2 = this;
 
       event.preventDefault();
+      this.clearErrorMessages();
       var request_object = {
         email: this.state.email,
         password: this.state.password
@@ -17636,8 +17642,21 @@ var LoginForm = function (_React$Component) {
         this.props.history.push('/users/test');
         _toastr2.default.success('Great you got logged in!!!!');
       } else {
-        console.log("could not log in");
+        var emailMessage = result.message.email ? result.message.email : '';
+        var passwordMessage = result.message.password ? result.message.password : '';
+        this.setState({
+          errorMessageEmail: emailMessage,
+          errorMessagePassword: passwordMessage
+        });
       }
+    }
+  }, {
+    key: 'clearErrorMessages',
+    value: function clearErrorMessages() {
+      this.setState({
+        errorMessageEmail: '',
+        errorMessagePassword: ''
+      });
     }
   }, {
     key: 'render',
@@ -17648,11 +17667,21 @@ var LoginForm = function (_React$Component) {
         _react2.default.createElement(
           'form',
           { onSubmit: this.handleSubmit },
+          this.state.errorMessageEmail === "" ? "" : _react2.default.createElement(
+            'p',
+            null,
+            this.state.errorMessageEmail
+          ),
           _react2.default.createElement(
             'label',
             null,
             'Email:',
             _react2.default.createElement('input', { type: 'email', name: 'email', value: this.state.email, onChange: this.handleEmailChange })
+          ),
+          this.state.errorMessagePassword === "" ? "" : _react2.default.createElement(
+            'p',
+            null,
+            this.state.errorMessagePassword
           ),
           _react2.default.createElement(
             'label',
@@ -17710,7 +17739,8 @@ var SignupForm = function (_React$Component) {
 
     _this.state = {
       email: '',
-      password: ''
+      password: '',
+      errorMessageEmail: ''
     };
     _this.handleSignupResult = _this.handleSignupResult.bind(_this);
     _this.handleEmailChange = _this.handleEmailChange.bind(_this);
@@ -17735,6 +17765,7 @@ var SignupForm = function (_React$Component) {
       var _this2 = this;
 
       event.preventDefault();
+      this.setState({ errorMessageEmail: '' });
       var request_object = {
         email: this.state.email,
         password: this.state.password
@@ -17759,9 +17790,9 @@ var SignupForm = function (_React$Component) {
     value: function handleSignupResult(result) {
       if (result.success === true) {
         this.props.history.push('/users/test');
-        _toastr2.default.success('Great you got logged in!!!!');
+        _toastr2.default.success('Great you signed up!!!!');
       } else {
-        console.log("could not log in");
+        this.setState({ errorMessageEmail: result.message });
       }
     }
   }, {
@@ -17773,6 +17804,11 @@ var SignupForm = function (_React$Component) {
         _react2.default.createElement(
           'form',
           { onSubmit: this.handleSubmit },
+          this.state.errorMessageEmail === "" ? "" : _react2.default.createElement(
+            'p',
+            null,
+            this.state.errorMessageEmail
+          ),
           _react2.default.createElement(
             'label',
             null,

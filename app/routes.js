@@ -29,8 +29,7 @@ module.exports = function(app, passport) {
       }
 
       if(!user) {
-        res.redirect('/');
-        return res.send({ success : false, message : 'authentication failed' });
+        return res.send({ success : false, message : info });
       }
 
       req.login(user, loginErr => {
@@ -49,14 +48,14 @@ module.exports = function(app, passport) {
       }
 
       if(!user) {
-        return res.send({ success : false, message : 'authentication failed' });
+        return res.send({ success : false, message : info });
       }
 
       req.login(user, loginErr => {
         if(loginErr) {
           return next(loginErr);
         }
-          return res.send(JSON.stringify({ success : true, message : 'authentication succeeded'}));
+          return res.send(JSON.stringify({ success : true, message : info}));
       });
     })(req, res, next);
   });

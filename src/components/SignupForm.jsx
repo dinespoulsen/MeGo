@@ -6,7 +6,8 @@ export default class SignupForm extends React.Component {
     super(props);
     this.state = {
                   email: '',
-                  password: ''
+                  password: '',
+                  errorMessageEmail: ''
                 };
     this.handleSignupResult = this.handleSignupResult.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -24,6 +25,7 @@ export default class SignupForm extends React.Component {
 
   handleSubmit(event){
     event.preventDefault();
+    this.setState({errorMessageEmail: ''})
     let request_object = {
       email: this.state.email,
       password: this.state.password
@@ -47,7 +49,7 @@ export default class SignupForm extends React.Component {
       toastr.success('Great you signed up!!!!');
     }
     else {
-      console.log("could not log in");
+      this.setState({errorMessageEmail: result.message});
     }
   }
 
@@ -55,10 +57,12 @@ export default class SignupForm extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
+          {this.state.errorMessageEmail === "" ? "" : <p>{this.state.errorMessageEmail}</p>}
           <label >
             Email:
             <input type="email" name="email" value={this.state.email} onChange={this.handleEmailChange}/>
           </label>
+
           <label>
             Password:
             <input type="password" name="password" value={this.state.password} onChange={this.handlePasswordChange}/>

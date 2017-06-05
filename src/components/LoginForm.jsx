@@ -6,28 +6,34 @@ export default class LoginForm extends React.Component {
     super(props);
     this.state = {
                   email: '',
-                  password: ''
+                  password: '',
+                  errorMessageEmail: '',
+                  errorMessagePassword: ''
                 };
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleLoginResult = this.handleLoginResult.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.clearErrorMessages = this.clearErrorMessages.bind(this);
   }
 
   handleEmailChange(event) {
+    this.clearErrorMessages();
     this.setState({email: event.target.value});
   }
 
   handlePasswordChange(event) {
+    this.clearErrorMessages();
     this.setState({password: event.target.value});
   }
 
   handleSubmit(event){
     event.preventDefault();
+    this.clearErrorMessages();
     let request_object = {
       email: this.state.email,
       password: this.state.password
-    }
+    };
 
     let signin_url = '/login';
     fetch(signin_url,{
@@ -47,8 +53,20 @@ export default class LoginForm extends React.Component {
       toastr.success('Great you got logged in!!!!');
     }
     else {
-      console.log("could not log in");
+      let emailMessage = result.message.email ? result.message.email : '';
+      let passwordMessage = result.message.password ? result.message.password : '';
+      this.setState({
+        errorMessageEmail: emailMessage,
+        errorMessagePassword: passwordMessage
+      });
     }
+  }
+
+  clearErrorMessages() {
+    this.setState({
+      errorMessageEmail: '',
+      errorMessagePassword : ''
+    });
   }
 
 
@@ -56,10 +74,12 @@ export default class LoginForm extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
+          {this.state.errorMessageEmail === "" ? "" : <p>{this.state.errorMessageEmail}</p>}
           <label >
             Email:
             <input type="email" name="email" value={this.state.email} onChange={this.handleEmailChange}/>
           </label>
+          {this.state.errorMessagePassword === "" ? "" : <p>{this.state.errorMessagePassword}</p>}
           <label>
             Password:
             <input type="password" name="password" value={this.state.password} onChange={this.handlePasswordChange}/>
