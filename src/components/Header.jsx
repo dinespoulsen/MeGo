@@ -13,13 +13,13 @@ class Header extends React.Component {
   }
 
   render() {
-    let loinLogoutlink = this.isLoggedIn() ? <a href="/logout">Logout</a> : (<Link to="/login">Login</Link>);
+    let loginLogoutLink = this.isLoggedIn() ? <a href="/logout">Logout</a> : (<Link to="/login">Login</Link>);
     let profileLink = this.isLoggedIn() ? <Link to={"/users/" + this.props.user.get("id") }>Profile</Link> : "";
     return (
       <div>
         { profileLink }
         <Link to="/">Signup</Link>
-        { loginLogoutlink }
+        { loginLogoutLink }
       </div>
     );
   }
