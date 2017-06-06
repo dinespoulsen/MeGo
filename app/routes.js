@@ -60,6 +60,12 @@ module.exports = function(app, passport) {
     })(req, res, next);
   });
 
+  app.post('/getuserdata', isLoggedIn, function(req, res) {
+    if (req.isAuthenticated()){
+      return res.send(JSON.stringify({ success: true, user: req.user }));
+    }
+  });
+
   app.get('/users/:id', function(req, res, next) {
     if(req.user) {
       if(req.user.id === req.params.id) {

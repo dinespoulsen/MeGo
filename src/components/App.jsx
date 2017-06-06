@@ -1,17 +1,21 @@
 import React, { Component } from 'react'
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom'
 import connectedLoginForm from './LoginForm.jsx';
 import connectedSignupForm from './SignupForm.jsx';
-import User from './User.jsx';
+import connectedUser from './User.jsx';
+import Header from './Header.jsx';
 
 export default class App extends Component {
   render() {
     return (
       <Router>
         <div>
-          <Route exact path='/' component={connectedSignupForm} />
-          <Route path='/login' component={connectedLoginForm} />
-          <Route path='/users/:id' component={User} />
+          <Header></Header>
+          <Switch>
+            <Route exact path='/' component={connectedSignupForm} />
+            <Route path='/login' component={connectedLoginForm} />
+            <Route path='/users/:id' component={connectedUser} />
+          </Switch>
         </div>
       </Router>
     )
