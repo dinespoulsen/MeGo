@@ -12491,7 +12491,7 @@ var Header = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var link = this.isLoggedIn() ? _react2.default.createElement(
+      var loginLogoutLink = this.isLoggedIn() ? _react2.default.createElement(
         'a',
         { href: '/logout' },
         'Logout'
@@ -12514,7 +12514,7 @@ var Header = function (_React$Component) {
           { to: '/' },
           'Signup'
         ),
-        link
+        loginLogoutLink
       );
     }
   }]);
