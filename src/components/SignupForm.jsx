@@ -48,9 +48,9 @@ class SignupForm extends React.Component {
 
   handleSignupResult(result) {
     if(result.success === true){
-      let user = Map({email: this.state.email, id: result.user.userId, name: ""});
+      let user = Map({email: this.state.email, id: result.user._id, name: ""});
       this.props.addUser(user);
-      this.props.history.push('/users/' + result.userId);
+      this.props.history.push('/users/' + result.user._id);
       toastr.success('Great you signed up!!!!');
     }
     else {

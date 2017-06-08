@@ -36,7 +36,7 @@ module.exports = function(app, passport) {
         if(loginErr) {
           return next(loginErr);
         }
-        return res.send(JSON.stringify({ success: true, message: info, userId: user.id }));
+        return res.send(JSON.stringify({ success: true, message: info, user: user }));
       });
     })(req, res, next);
   });

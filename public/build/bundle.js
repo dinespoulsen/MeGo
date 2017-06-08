@@ -18199,9 +18199,9 @@ var SignupForm = function (_React$Component) {
     key: 'handleSignupResult',
     value: function handleSignupResult(result) {
       if (result.success === true) {
-        var user = (0, _immutable.Map)({ email: this.state.email, id: result.user.userId, name: "" });
+        var user = (0, _immutable.Map)({ email: this.state.email, id: result.user._id, name: "" });
         this.props.addUser(user);
-        this.props.history.push('/users/' + result.userId);
+        this.props.history.push('/users/' + result.user._id);
         _toastr2.default.success('Great you signed up!!!!');
       } else {
         this.setState({ errorMessageEmail: result.message });
