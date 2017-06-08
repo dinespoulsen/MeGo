@@ -17859,6 +17859,8 @@ var EditUser = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (EditUser.__proto__ || Object.getPrototypeOf(EditUser)).call(this, props));
 
     _this.handleEditClick = _this.handleEditClick.bind(_this);
+    _this.handleSaveUSerDataResult = _this.handleSaveUSerDataResult.bind(_this);
+    _this.saveUserData = _this.saveUserData.bind(_this);
     return _this;
   }
 
@@ -17866,9 +17868,42 @@ var EditUser = function (_React$Component) {
     key: 'handleEditClick',
     value: function handleEditClick() {
       if (this.props.editProfile.get("isEditing")) {
-        return this.props.editUser(!this.props.editProfile.get("isEditing"));
+        var email = this.props.user.get("email");
+        var name = this.props.user.get("name");
+        return this.saveUserData(email, name);
       }
       this.props.editUser(true);
+    }
+  }, {
+    key: 'saveUserData',
+    value: function saveUserData(email, name) {
+      var _this2 = this;
+
+      var userData = {
+        email: email,
+        name: name
+      };
+      fetch("/users/" + this.props.user.get("id"), {
+        method: 'put',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+      }).then(function (message) {
+        return message.json();
+      }).then(function (result) {
+        _this2.handleSaveUSerDataResult(result);
+      });
+    }
+  }, {
+    key: 'handleSaveUSerDataResult',
+    value: function handleSaveUSerDataResult(result) {
+      if (result.success) {
+        return this.props.editUser(!this.props.editProfile.get("isEditing"));
+      }
+      console.log("fail");
+      //handle failed user update
     }
   }, {
     key: 'render',
@@ -18002,9 +18037,9 @@ var LoginForm = function (_React$Component) {
     key: 'handleLoginResult',
     value: function handleLoginResult(result) {
       if (result.success === true) {
-        var user = (0, _immutable.Map)({ email: this.state.email, id: result.userId });
+        var user = (0, _immutable.Map)({ email: this.state.email, id: result.user._id, name: result.user.local.name });
         this.props.addUser(user);
-        this.props.history.push('/users/' + result.userId);
+        this.props.history.push('/users/' + result.user._id);
         _toastr2.default.success('Great you got logged in!!!!');
       } else {
         var emailMessage = result.message.email ? result.message.email : '';
@@ -18164,7 +18199,7 @@ var SignupForm = function (_React$Component) {
     key: 'handleSignupResult',
     value: function handleSignupResult(result) {
       if (result.success === true) {
-        var user = (0, _immutable.Map)({ email: this.state.email, id: result.user.userId });
+        var user = (0, _immutable.Map)({ email: this.state.email, id: result.user.userId, name: "" });
         this.props.addUser(user);
         this.props.history.push('/users/' + result.userId);
         _toastr2.default.success('Great you signed up!!!!');
@@ -18291,7 +18326,7 @@ var User = function (_React$Component) {
     key: 'handleUserResult',
     value: function handleUserResult(result) {
       if (result.success === true) {
-        var user = (0, _immutable.Map)({ email: result.user.local.email, id: result.user._id });
+        var user = (0, _immutable.Map)({ email: result.user.local.email, id: result.user._id, name: result.user.local.name });
         this.props.addUser(user);
       }
       // handle when failure
@@ -18313,14 +18348,24 @@ var User = function (_React$Component) {
         _react2.default.createElement(
           'p',
           null,
-          this.props.user ? this.props.user.get("name") : ""
+          'Name: ',
+          _react2.default.createElement(
+            'span',
+            null,
+            this.props.user ? this.props.user.get("name") : ""
+          )
         ),
         _react2.default.createElement(
           'p',
           null,
-          this.props.user ? this.props.user.get("email") : ""
+          'Email: ',
+          _react2.default.createElement(
+            'span',
+            null,
+            this.props.user ? this.props.user.get("email") : ""
+          )
         ),
-        _react2.default.createElement(_EditUser2.default, null)
+        this.props.user ? _react2.default.createElement(_EditUser2.default, null) : ""
       );
     }
   }]);
@@ -18352,7 +18397,7 @@ exports.editUserName = exports.editUserEmail = exports.editUser = exports.addUse
 var _immutable = __webpack_require__(28);
 
 var addUser = exports.addUser = function addUser(state, user) {
-  var nextState = state.set("user", user.set("name", ""));
+  var nextState = state.set("user", user);
   return nextState.set("editUser", (0, _immutable.Map)());
 };
 

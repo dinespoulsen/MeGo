@@ -3,9 +3,10 @@ import bcrypt from 'bcrypt-nodejs';
 
 var userSchema = mongoose.Schema({
 
-    local            : {
-        email        : String,
-        password     : String,
+    local: {
+        email: String,
+        password: String,
+        name: String
     },
     facebook         : {
         id           : String,

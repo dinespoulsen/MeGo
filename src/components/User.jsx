@@ -30,7 +30,7 @@ class User extends React.Component {
 
   handleUserResult(result) {
     if(result.success === true){
-      let user = Map({email: result.user.local.email, id: result.user._id});
+      let user = Map({email: result.user.local.email, id: result.user._id, name: result.user.local.name});
       this.props.addUser(user);
     }
     // handle when failure
@@ -46,9 +46,9 @@ class User extends React.Component {
   render() {
     return (
       <div>
-        <p>{this.props.user ? this.props.user.get("name") : ""}</p>
-        <p>{this.props.user ? this.props.user.get("email") : ""}</p>
-        <ConnectedEditUser></ConnectedEditUser>
+        <p>Name: <span>{this.props.user ? this.props.user.get("name") : ""}</span></p>
+        <p>Email: <span>{this.props.user ? this.props.user.get("email") : ""}</span></p>
+        { this.props.user ? <ConnectedEditUser></ConnectedEditUser> : ""}
       </div>
     );
   }

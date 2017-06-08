@@ -55,15 +55,32 @@ module.exports = function(app, passport) {
         if(loginErr) {
           return next(loginErr);
         }
-          return res.send(JSON.stringify({ success: true, message: info, userId: user.id }));
+          return res.send(JSON.stringify({ success: true, message: info, user: user }));
       });
     })(req, res, next);
   });
 
   app.post('/getuserdata', isLoggedIn, function(req, res) {
-    if (req.isAuthenticated()){
-      return res.send(JSON.stringify({ success: true, user: req.user }));
-    }
+    return res.send(JSON.stringify({ success: true, user: req.user }));
+  });
+
+  app.put('/users/:id', function(req, res, next) {
+    passport.authenticate('local-update-user', function(err, user, info) {
+      if (err) {
+        return next(err);
+      }
+
+      if(!user) {
+        return res.send({ success: false, message: info });
+      }
+
+      req.login(user, loginErr => {
+        if(loginErr) {
+          return next(loginErr);
+        }
+          return res.send(JSON.stringify({ success: true, message: info, userId: user.id }));
+      });
+    })(req, res, next);
   });
 
   app.get('/users/:id', function(req, res, next) {

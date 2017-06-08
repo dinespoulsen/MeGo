@@ -1,7 +1,7 @@
 import { Map } from 'immutable';
 
 export const addUser = (state, user) => {
-  let nextState = state.set("user", user.set("name", ""));
+  let nextState = state.set("user", user);
   return nextState.set("editUser", Map());
 };
 
