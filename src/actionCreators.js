@@ -25,3 +25,10 @@ export function editUserName(name) {
     name: name
   };
 }
+
+export function fetchData(fetchInfo) {
+  return {
+    type: 'FETCH_INFO',
+    fetchInfo: fetchInfo
+  };
+}

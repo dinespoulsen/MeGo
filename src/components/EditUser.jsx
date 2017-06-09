@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import ConnectedEditForm from './EditForm.jsx';
 import * as actionCreators from '../actionCreators';
-
+import Spinner from 'react-spinkit';
+import { Map } from 'immutable';
 
 class EditUser extends React.Component {
   constructor(props) {
@@ -15,11 +16,19 @@ class EditUser extends React.Component {
 
   handleEditClick(){
     if(this.props.editProfile.get("isEditing")){
+
+      let fetchInfo = Map({isFetching: true, isFetchSuccess: ""});
+      this.props.fetchData(fetchInfo);
+      this.props.editUser(false);
+
       let email = this.props.user.get("email");
       let name = this.props.user.get("name");
       return this.saveUserData(email, name);
     }
     this.props.editUser(true);
+
+    let fetchInfo = Map({isFetching: false, isFetchSuccess: ""});
+    this.props.fetchData(fetchInfo);
   }
 
   saveUserData(email, name){
@@ -42,19 +51,23 @@ class EditUser extends React.Component {
   }
 
   handleSaveUSerDataResult(result){
+
     if(result.success){
-      return this.props.editUser(!this.props.editProfile.get("isEditing"))
+      let fetchInfo = Map({isFetching: false, isFetchSuccess: true});
+      return this.props.fetchData(fetchInfo);
     }
-    console.log("fail");
-    //handle failed user update
+      let fetchInfo = Map({isFetching: false, isFetchSuccess: false});
+      return this.props.fetchData(fetchInfo);
   }
 
   render() {
-    let editForm = this.props.editProfile.get("isEditing") ? (<ConnectedEditForm></ConnectedEditForm>) : "";
     return (
       <div>
         <button onClick={this.handleEditClick}>{this.props.editProfile.get("isEditing") ? "Save" : "Edit"}</button>
-        { editForm }
+        <ConnectedEditForm></ConnectedEditForm>
+        {this.props.fetchInfo.get("isFetchSuccess") ? <p>Profile Saved</p> : ""}
+        {this.props.fetchInfo.get("isFetchSuccess") === false ? <p>Profile could not be saved</p> : ""}
+        {this.props.fetchInfo.get("isFetching") ? (<Spinner name="three-bounce" />) : ""}
       </div>
     );
   }
@@ -63,7 +76,8 @@ class EditUser extends React.Component {
 function mapStateToProps(state) {
   return {
     user: state.get("user"),
-    editProfile: state.get("editUser")
+    editProfile: state.get("editUser"),
+    fetchInfo: state.get("fetchInfo")
    }
 }
 

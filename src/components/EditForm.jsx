@@ -19,7 +19,7 @@ class EditForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={(!this.props.isEditing || this.props.isEditing === void 0) ? "collapse" : "expand"}>
         <label>
           Name:
           <input type="text" onChange={this.handleNameChange} value={this.props.user.get("name")}/>
@@ -35,7 +35,8 @@ class EditForm extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.get("user")
+    user: state.get("user"),
+    isEditing: state.get("editUser").get("isEditing")
    }
 }
 

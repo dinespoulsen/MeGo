@@ -2,7 +2,7 @@ import { Map } from 'immutable';
 
 export const addUser = (state, user) => {
   let nextState = state.set("user", user);
-  return nextState.set("editUser", Map());
+  return nextState.set("editUser", Map()).set("fetchInfo", Map({isFetchSuccess: ""}));
 };
 
 export const editUser = (state, isEditing) => {
@@ -20,4 +20,11 @@ export const editUserName = (state, name) => {
   let user = state.get("user");
   let updatedUser = user.set("name", name)
   return state.set("user", updatedUser);
+};
+
+export const fetchData = (state, fetchInfo) => {
+  let isFetching = fetchInfo.get("isFetching");
+  let isFetchSuccess = fetchInfo.get("isFetchSuccess");
+  let nextState = state.set("fetchInfo", Map({isFetching: isFetching, isFetchSuccess: isFetchSuccess}));
+  return nextState;
 };
