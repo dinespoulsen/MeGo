@@ -14,10 +14,14 @@ export default class App extends Component {
           <Switch>
             <Route exact path='/' component={connectedSignupForm} />
             <Route path='/login' component={connectedLoginForm} />
-            <Route path='/users/:id' component={connectedUser} />
+            <Route path='/users/:id' component={connectedUser} onChange={onRouteChancheHandler}/>
           </Switch>
         </div>
       </Router>
     )
   }
+}
+
+function onRouteChancheHandler(){
+  console.log("test");
 }

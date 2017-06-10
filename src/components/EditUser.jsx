@@ -66,7 +66,7 @@ class EditUser extends React.Component {
         <button onClick={this.handleEditClick}>{this.props.editProfile.get("isEditing") ? "Save" : "Edit"}</button>
         <ConnectedEditForm></ConnectedEditForm>
         {this.props.fetchInfo.get("isFetchSuccess") ? <p>Profile Saved</p> : ""}
-        {this.props.fetchInfo.get("isFetchSuccess") === false ? <p>Profile could not be saved</p> : ""}
+        {this.props.fetchInfo.get("isFetchSuccess") === false ? <p>Profile could not be saved!</p> : ""}
         {this.props.fetchInfo.get("isFetching") ? (<Spinner name="three-bounce" />) : ""}
       </div>
     );

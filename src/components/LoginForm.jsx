@@ -1,7 +1,7 @@
-import React from 'react'
-import toastr from 'toastr'
-import * as actionCreators from '../actionCreators'
-import {connect} from 'react-redux'
+import React from 'react';
+import toastr from 'toastr';
+import * as actionCreators from '../actionCreators';
+import {connect} from 'react-redux';
 import { Map } from 'immutable';
 
 class LoginForm extends React.Component {
