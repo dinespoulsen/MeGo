@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Header from './Header.jsx';
+import ConnectedAvatarUpload from './AvatarUpload.jsx';
+import ConnectedAvatar from './Avatar.jsx'
 import ConnectedEditUser from './EditUser.jsx';
 import * as actionCreators from '../actionCreators';
 import { Map } from 'immutable';
@@ -46,6 +48,8 @@ class User extends React.Component {
   render() {
     return (
       <div>
+        <ConnectedAvatar></ConnectedAvatar>
+        <ConnectedAvatarUpload></ConnectedAvatarUpload>
         <p>Name: <span>{this.props.user ? this.props.user.get("name") : ""}</span></p>
         <p>Email: <span>{this.props.user ? this.props.user.get("email") : ""}</span></p>
         { this.props.user ? <ConnectedEditUser></ConnectedEditUser> : ""}

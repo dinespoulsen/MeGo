@@ -1,4 +1,4 @@
-import {addUser, editUser, editUserEmail, editUserName, fetchData} from "./coreActions.jsx";
+import {addUser, editUser, editUserEmail, editUserName, fetchData, saveAvatarPreview} from "./coreActions.jsx";
 import { Map } from 'immutable';
 
 export default function reducer(state = Map(), action){
@@ -13,6 +13,8 @@ export default function reducer(state = Map(), action){
       return editUserName(state, action.name);
     case "FETCH_INFO":
       return fetchData(state, action.fetchInfo);
+    case "AVATAR_PREVIEW":
+      return saveAvatarPreview(state, action.avatarUrl);
   }
   return state;
 };

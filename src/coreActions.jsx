@@ -28,3 +28,7 @@ export const fetchData = (state, fetchInfo) => {
   let nextState = state.set("fetchInfo", Map({isFetching: isFetching, isFetchSuccess: isFetchSuccess}));
   return nextState;
 };
+
+export const saveAvatarPreview = (state, avatarUrl) => {
+  return state.set("avatarUrl", avatarUrl);
+};

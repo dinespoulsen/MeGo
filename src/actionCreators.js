@@ -32,3 +32,10 @@ export function fetchData(fetchInfo) {
     fetchInfo: fetchInfo
   };
 }
+
+export function saveAvatarPreview(avatarUrl) {
+  return {
+    type: 'AVATAR_PREVIEW',
+    avatarUrl: avatarUrl
+  };
+}
