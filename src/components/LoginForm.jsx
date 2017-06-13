@@ -52,7 +52,7 @@ class LoginForm extends React.Component {
 
   handleLoginResult(result) {
     if(result.success === true){
-      let user = Map({email: this.state.email, id: result.user._id, name: result.user.local.name});
+      let user = Map({email: this.state.email, id: result.user._id, name: result.user.local.name, avatarFileName: result.user.local.avatarFileName});
       this.props.addUser(user);
       this.props.history.push('/users/' + result.user._id);
       toastr.success('Great you got logged in!!!!');

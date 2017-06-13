@@ -1,8 +1,9 @@
 import { Map } from 'immutable';
 
 export const addUser = (state, user) => {
+
   let nextState = state.set("user", user);
-  return nextState.set("editUser", Map()).set("fetchInfo", Map({isFetchSuccess: ""}));
+  return nextState.set("editUser", Map()).set("fetchInfo", Map({isFetchSuccess: ""})).set("avatarUrl", "");
 };
 
 export const editUser = (state, isEditing) => {

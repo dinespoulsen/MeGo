@@ -32,6 +32,7 @@ export default function(passport) {
               var newUser = new User();
               newUser.local.email    = email;
               newUser.local.password = newUser.generateHash(password);
+              newUser.local.avatarFileName = "";
 
               newUser.save(function(err) {
                   if (err)
@@ -61,6 +62,7 @@ export default function(passport) {
           }
 
           if (req.user._id != req.params.id){
+
             return done(null, false, "You can't access that user");
           }
 

@@ -1,5 +1,8 @@
 import path from 'path';
 import express from'express';
+import s3 from '../config/s3.js'
+import  fs from "fs";
+import User from '../models/user';
 
 module.exports = function(app, passport) {
 
@@ -58,6 +61,55 @@ module.exports = function(app, passport) {
           return res.send(JSON.stringify({ success: true, message: info, user: user }));
       });
     })(req, res, next);
+  });
+
+  app.post('/s3signedurl', isLoggedIn, (req, res) => {
+    console.log("hits route");
+    console.log(req.body.bucket, req.body.key)
+    let params = {Bucket: req.body.bucket, Key: req.body.key};
+    let url = s3.getSignedUrl('getObject', params);
+    return res.send(JSON.stringify({ signedUrl: url}));
+  });
+
+  app.post('/s3upload', isLoggedIn, function(req, res) {
+    User.findOne({ '_id' :  req.user._id }, function(err, user) {
+        if (err) {
+          throw err;
+        }
+        if (!user) {
+          return res.send(JSON.stringify({ success: false}));
+        }
+
+        let imageDataUrl = req.body.dataUrl;
+        let regex = /^data:.+\/(.+);base64,(.*)$/;
+        let matches = imageDataUrl.match(regex);
+        let ext = matches[1];
+        let data = matches[2];
+        let buffer = new Buffer(data, 'base64');
+
+        user.local.avatarFileName = req.body.fileName + "." + ext;
+
+        user.save(function(err) {
+            if (err) {
+              throw err;
+            }
+
+            s3.putObject({
+              ACL: 'public-read',
+              Bucket: process.env.AWS_S3_BUCKET_NAME,
+              Key: req.body.fileName + "." + ext,
+              Body: buffer,
+              ContentType: 'image/' + ext
+            }, function(error, response) {
+              if(error){
+                throw err;
+              }
+              return res.send(JSON.stringify({ success: true}));
+            });
+        });
+    });
+
+
   });
 
   app.post('/getuserdata', isLoggedIn, function(req, res) {

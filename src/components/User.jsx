@@ -32,7 +32,7 @@ class User extends React.Component {
 
   handleUserResult(result) {
     if(result.success === true){
-      let user = Map({email: result.user.local.email, id: result.user._id, name: result.user.local.name});
+      let user = Map({email: result.user.local.email, id: result.user._id, name: result.user.local.name, avatarFileName: result.user.local.avatarFileName});
       this.props.addUser(user);
     }
     // handle when failure
@@ -48,7 +48,7 @@ class User extends React.Component {
   render() {
     return (
       <div>
-        <ConnectedAvatar></ConnectedAvatar>
+        {this.props.user ? <ConnectedAvatar></ConnectedAvatar> : ""}
         <ConnectedAvatarUpload></ConnectedAvatarUpload>
         <p>Name: <span>{this.props.user ? this.props.user.get("name") : ""}</span></p>
         <p>Email: <span>{this.props.user ? this.props.user.get("email") : ""}</span></p>

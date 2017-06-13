@@ -4,6 +4,7 @@ import * as actionCreators from '../actionCreators';
 import { Map } from 'immutable';
 import ReactCrop from 'react-image-crop';
 import CropStyles from 'react-image-crop/dist/ReactCrop.css';
+import ConnectAvatarSelector from './AvatarSaver.jsx'
 
 class AvatarUpload extends React.Component {
   constructor(props) {
@@ -13,6 +14,8 @@ class AvatarUpload extends React.Component {
     }
     this.handleFileSelection = this.handleFileSelection.bind(this);
     this.handleImageCrop = this.handleImageCrop.bind(this);
+    this.setInitialAvatar = this.setInitialAvatar.bind(this);
+    this.cropImage = this.cropImage.bind(this);
   }
 
   handleFileSelection(event){
@@ -59,15 +62,26 @@ class AvatarUpload extends React.Component {
   }
 
   handleImageCrop(crop, pixelCrop){
+    this.cropImage(crop, pixelCrop);
+  }
+
+  setInitialAvatar(crop, image, pixelCrop){
+    this.cropImage(crop, pixelCrop);
+  }
+
+  cropImage(crop, pixelCrop){
     let canvas = document.createElement('canvas');
     let img = new Image;
     let ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0);
 
     let _this = this;
+
     img.onload = function(){
+      canvas.width = 200;
+      canvas.height = 200;
       ctx.drawImage(img, pixelCrop.x, pixelCrop.y, pixelCrop.width, pixelCrop.height, 0, 0 , 200, 200);
-      var dataUrl = canvas.toDataURL("image/jpg");
+      let dataUrl = canvas.toDataURL("image/jpg");
       _this.props.saveAvatarPreview(dataUrl);
     };
     img.src = this.state.imagePreviewUrl;
@@ -76,9 +90,9 @@ class AvatarUpload extends React.Component {
   render() {
     return (
       <div>
-        <input type="file" onChange={this.handleFileSelection}/>
+        {this.state.imagePreviewUrl === "" ? <input type="file" onChange={this.handleFileSelection} /> : <ConnectAvatarSelector></ConnectAvatarSelector>}
         <div>
-          {this.state.imagePreviewUrl !== "" ? <ReactCrop src={this.state.imagePreviewUrl} onChange={this.handleImageCrop} crop={{x: 10, y: 10, width: 60, aspect: 1/1}} /> : ""}
+          {this.state.imagePreviewUrl !== "" ? <ReactCrop src={this.state.imagePreviewUrl} onImageLoaded={this.setInitialAvatar} onChange={this.handleImageCrop} crop={{x: 10, y: 10, width: 60, aspect: 1/1}} /> : ""}
         </div>
       </div>
     );
