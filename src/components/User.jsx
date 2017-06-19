@@ -47,12 +47,17 @@ class User extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.props.user ? <ConnectedAvatar></ConnectedAvatar> : ""}
-        <ConnectedAvatarUpload></ConnectedAvatarUpload>
-        <p>Name: <span>{this.props.user ? this.props.user.get("name") : ""}</span></p>
-        <p>Email: <span>{this.props.user ? this.props.user.get("email") : ""}</span></p>
-        { this.props.user ? <ConnectedEditUser></ConnectedEditUser> : ""}
+      <div className="user-info-container">
+        <div>
+          {this.props.user ? <ConnectedAvatar></ConnectedAvatar> : ""}
+          <ConnectedAvatarUpload></ConnectedAvatarUpload>
+        </div>
+
+        <div>
+          <p>Name: <span>{this.props.user ? this.props.user.get("name") : ""}</span></p>
+          <p>Email: <span>{this.props.user ? this.props.user.get("email") : ""}</span></p>
+          { this.props.user ? <ConnectedEditUser></ConnectedEditUser> : ""}
+        </div>
       </div>
     );
   }

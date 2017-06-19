@@ -24,14 +24,14 @@ class Header extends React.Component {
 
   render() {
 
-    let loginLogoutLink = this.isLoggedIn() ? <a href="/logout">Logout</a> : (<Link to="/login">Login</Link>);
-    let profileLink = this.isLoggedIn() ? <Link to={"/users/" + this.props.user.get("id") } onClick={this.handleLinkClick}>Profile</Link> : <Link to="/">Signup</Link>;
+    let loginLogoutLink = this.isLoggedIn() ? <a href="/logout" className="header-link">LOGOUT</a> : (<Link to="/login" className="header-link">LOGIN</Link>);
+    let profileLink = this.isLoggedIn() ? <Link to={"/users/" + this.props.user.get("id") } onClick={this.handleLinkClick} className="header-link">PROFILE</Link> : <Link to="/" className="header-link">SIGNUP</Link>;
 
     return (
-      <div>
+      <header className="header-container">
         { profileLink }
         { loginLogoutLink }
-      </div>
+      </header>
     );
   }
 }

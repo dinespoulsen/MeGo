@@ -60,19 +60,27 @@ class SignupForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="form-container">
         <form onSubmit={this.handleSubmit}>
-          {this.state.errorMessageEmail === "" ? "" : <p>{this.state.errorMessageEmail}</p>}
-          <label >
-            Email:
-            <input type="email" name="email" value={this.state.email} onChange={this.handleEmailChange}/>
-          </label>
+          
+          <div>
+            {this.state.errorMessageEmail === "" ? "" : <p>{this.state.errorMessageEmail}</p>}
+          </div>
 
-          <label>
-            Password:
+          <div className="input-container">
+            <label >Email:</label>
+            <input type="email" name="email" value={this.state.email} onChange={this.handleEmailChange}/>
+          </div>
+
+          <div className="input-container">
+            <label>Password:</label>
             <input type="password" name="password" value={this.state.password} onChange={this.handlePasswordChange}/>
-          </label>
-          <input type="submit" value="Submit"/>
+          </div>
+
+          <div className="input-container-button">
+            <input type="submit" value="Submit"/>
+          </div>
+
         </form>
       </div>
     );
