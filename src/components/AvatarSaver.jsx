@@ -8,9 +8,11 @@ class AvatarSaver extends React.Component {
     super(props);
 
     this.handleOnSaveClick = this.handleOnSaveClick.bind(this);
+    this.handleUploadResult = this.handleUploadResult.bind(this);
   }
 
   handleOnSaveClick(){
+    this.props.isCroppingImage(false);
     let request_object = {
       dataUrl: this.props.avatarUrl,
       fileName: "avatar"
@@ -25,13 +27,16 @@ class AvatarSaver extends React.Component {
       },
       body: JSON.stringify(request_object)
     }).then(message => message.json())
-    .then(result => console.log(result.success));
+    .then(result => this.handleUploadResult(result.success));
 
   }
 
-  // handleUploadResult(){
-  //
-  // }
+  handleUploadResult(result){
+    if(result){
+      console.log("upload was success");
+      return this.props.saveAvatarPreview("");
+    }
+  }
 
   render() {
     return (

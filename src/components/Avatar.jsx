@@ -1,27 +1,27 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import s3 from "../../config/s3.js";
+import * as actionCreators from '../actionCreators';
 
 class Avatar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      signedUrl: ""
-    }
     this.getImageSrc = this.getImageSrc.bind(this);
     this.getSignedUrl = this.getSignedUrl.bind(this);
     this.handleSignedUrlResult = this.handleSignedUrlResult.bind(this);
   }
 
   componentDidMount(){
-    this.getSignedUrl("mego-images", this.props.avatarFileName);
+    if(this.props.avatarSignedUrl === undefined){
+      return  this.getSignedUrl("mego-images", this.props.avatarFileName);
+    }
   }
 
   getImageSrc(){
     if(this.props.avatarUrl){
       return this.props.avatarUrl;
     }
-    return this.state.signedUrl;
+    return this.props.avatarSignedUrl;
   }
 
   getSignedUrl(bucket, key){
@@ -43,9 +43,7 @@ class Avatar extends React.Component {
   }
 
   handleSignedUrlResult(result){
-    this.setState({
-      signedUrl: result.signedUrl
-    })
+    this.props.saveAvatarSignedUrl(result.signedUrl);
   }
 
   render() {
@@ -60,8 +58,9 @@ class Avatar extends React.Component {
 function mapStateToProps(state) {
   return {
     avatarUrl: state.get("avatarUrl"),
-    avatarFileName: state.get("user").get("avatarFileName")
+    avatarFileName: state.get("user").get("avatarFileName"),
+    avatarSignedUrl: state.get("avatarSignedUrl")
    }
 }
 
-export default connect(mapStateToProps)(Avatar)
+export default connect(mapStateToProps, actionCreators)(Avatar)

@@ -1,4 +1,4 @@
-import {addUser, editUser, editUserEmail, editUserName, fetchData, saveAvatarPreview} from "./coreActions.jsx";
+import {addUser, editUser, editUserEmail, editUserName, fetchData, saveAvatarPreview, saveAvatarSignedUrl, isCropping} from "./coreActions.jsx";
 import { Map } from 'immutable';
 
 export default function reducer(state = Map(), action){
@@ -15,6 +15,10 @@ export default function reducer(state = Map(), action){
       return fetchData(state, action.fetchInfo);
     case "AVATAR_PREVIEW":
       return saveAvatarPreview(state, action.avatarUrl);
+    case "IS_CROPPING_IMAGE":
+      return isCropping(state, action.isCropping);
+    case "AVATAR_SIGNED_URL":
+      return saveAvatarSignedUrl(state, action.avatarSignedUrl);
   }
   return state;
 };

@@ -4,7 +4,7 @@ import * as actionCreators from '../actionCreators';
 import { Map } from 'immutable';
 import ReactCrop from 'react-image-crop';
 import CropStyles from 'react-image-crop/dist/ReactCrop.css';
-import ConnectAvatarSelector from './AvatarSaver.jsx'
+import ConnectedAvatarSaver from './AvatarSaver.jsx'
 
 class AvatarUpload extends React.Component {
   constructor(props) {
@@ -22,7 +22,9 @@ class AvatarUpload extends React.Component {
     let file = event.target.files[0];
     var img = new Image;
 
+    this.props.isCroppingImage(true);
     let _this = this;
+
     img.onload = function() {
       let canvas = document.createElement('canvas');
       let ctx = canvas.getContext("2d");
@@ -90,9 +92,9 @@ class AvatarUpload extends React.Component {
   render() {
     return (
       <div>
-        {this.state.imagePreviewUrl === "" ? <input type="file" onChange={this.handleFileSelection} /> : <ConnectAvatarSelector></ConnectAvatarSelector>}
+        {this.props.isCropping !== true ? <input type="file" onChange={this.handleFileSelection} /> : <ConnectedAvatarSaver></ConnectedAvatarSaver>}
         <div>
-          {this.state.imagePreviewUrl !== "" ? <ReactCrop src={this.state.imagePreviewUrl} onImageLoaded={this.setInitialAvatar} onChange={this.handleImageCrop} crop={{x: 10, y: 10, width: 60, aspect: 1/1}} /> : ""}
+          {this.props.isCropping === true ? <ReactCrop src={this.state.imagePreviewUrl} onImageLoaded={this.setInitialAvatar} onChange={this.handleImageCrop} crop={{x: 10, y: 10, width: 60, aspect: 1/1}} /> : ""}
         </div>
       </div>
     );
@@ -100,7 +102,9 @@ class AvatarUpload extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return {}
+  return {
+    isCropping: state.get("isCropping")
+  }
 }
 
 export default connect(mapStateToProps, actionCreators)(AvatarUpload)

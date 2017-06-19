@@ -33,3 +33,11 @@ export const fetchData = (state, fetchInfo) => {
 export const saveAvatarPreview = (state, avatarUrl) => {
   return state.set("avatarUrl", avatarUrl);
 };
+
+export const saveAvatarSignedUrl = (state, avatarSignedUrl) => {
+  return state.set("avatarSignedUrl", avatarSignedUrl);
+};
+
+export const isCropping = (state, isCropping) => {
+  return state.set("isCropping", isCropping)
+}

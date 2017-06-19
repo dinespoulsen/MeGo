@@ -39,3 +39,17 @@ export function saveAvatarPreview(avatarUrl) {
     avatarUrl: avatarUrl
   };
 }
+
+export function saveAvatarSignedUrl(avatarSignedUrl) {
+  return {
+    type: 'AVATAR_SIGNED_URL',
+    avatarSignedUrl: avatarSignedUrl
+  };
+}
+
+export function isCroppingImage(isCropping) {
+  return {
+    type: 'IS_CROPPING_IMAGE',
+    isCropping: isCropping
+  };
+}
