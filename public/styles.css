@@ -1,7 +1,14 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(./fonts/ElegantIcons.woff);
+}
+
 body {
   margin: 0px;
-  background-color: rgb(239, 245, 245);
+  background-color: rgb(251, 251, 251);
 }
+
+/*header*/
 
 .header-container {
   background-color: rgb(255, 255, 255);
@@ -20,6 +27,12 @@ body {
   margin-left: 20px;
 }
 
+#add-memory {
+  font-family: myFirstFont;
+  font-size: 20px;
+  text-decoration: none;
+}
+
 /*forms*/
 
 .form-container {
@@ -27,7 +40,6 @@ body {
   margin: auto;
   display: flex;
   flex-direction: column;
-  height: 1000px;
 }
 
 .input-container {
@@ -57,7 +69,10 @@ body {
 
 .user-info-container {
   display: flex;
+  max-width: 800px;
+  margin: auto;
 }
+
 
 .expand {
   height:auto;

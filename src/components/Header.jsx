@@ -26,11 +26,14 @@ class Header extends React.Component {
 
     let loginLogoutLink = this.isLoggedIn() ? <a href="/logout" className="header-link">LOGOUT</a> : (<Link to="/login" className="header-link">LOGIN</Link>);
     let profileLink = this.isLoggedIn() ? <Link to={"/users/" + this.props.user.get("id") } onClick={this.handleLinkClick} className="header-link">PROFILE</Link> : <Link to="/" className="header-link">SIGNUP</Link>;
-
+    let addMemoryLink = this.isLoggedIn() ? <Link to="/memories/add" id="add-memory">&#x4c;</Link> : "";
     return (
       <header className="header-container">
+
+        { addMemoryLink }
         { profileLink }
         { loginLogoutLink }
+
       </header>
     );
   }
