@@ -15,6 +15,7 @@ export default class App extends Component {
             <Route exact path='/' component={connectedSignupForm} />
             <Route path='/login' component={connectedLoginForm} />
             <Route path='/users/:id' component={connectedUser} onChange={onRouteChancheHandler}/>
+            <Route path='/memories/add' component={connectedUser} onChange={onRouteChancheHandler}/>
           </Switch>
         </div>
       </Router>

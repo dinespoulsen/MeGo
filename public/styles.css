@@ -4,8 +4,10 @@
 }
 
 body {
+  font-family: 'Open Sans', sans-serif;
   margin: 0px;
   background-color: rgb(251, 251, 251);
+  color: rgb(20, 31, 31);
 }
 
 /*header*/
@@ -23,11 +25,13 @@ body {
 }
 
 .header-link {
+  color: rgb(20, 31, 31);
   text-decoration: none;
   margin-left: 20px;
 }
 
 #add-memory {
+  color: rgb(20, 31, 31);
   font-family: myFirstFont;
   font-size: 20px;
   text-decoration: none;
