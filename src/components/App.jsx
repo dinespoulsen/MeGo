@@ -4,6 +4,7 @@ import connectedLoginForm from './LoginForm.jsx';
 import connectedSignupForm from './SignupForm.jsx';
 import connectedUser from './User.jsx';
 import Header from './Header.jsx';
+import AddMemory from './AddMemory.jsx'
 
 export default class App extends Component {
   render() {
@@ -14,15 +15,11 @@ export default class App extends Component {
           <Switch>
             <Route exact path='/' component={connectedSignupForm} />
             <Route path='/login' component={connectedLoginForm} />
-            <Route path='/users/:id' component={connectedUser} onChange={onRouteChancheHandler}/>
-            <Route path='/memories/add' component={connectedUser} onChange={onRouteChancheHandler}/>
+            <Route path='/users/:id' component={connectedUser} />
+            <Route path='/memories/add' component={AddMemory} />
           </Switch>
         </div>
       </Router>
     )
   }
-}
-
-function onRouteChancheHandler(){
-  console.log("test");
 }
