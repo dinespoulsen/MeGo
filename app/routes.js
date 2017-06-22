@@ -64,7 +64,7 @@ module.exports = function(app, passport) {
   });
 
   app.post('/s3signedurl', isLoggedIn, (req, res) => {
-    let params = {Bucket: req.body.bucket, Key: req.body.key, ResponseCacheControl: "max-age=1000"};
+    let params = {Bucket: req.body.bucket, Key: req.body.key};
     let url = s3.getSignedUrl('getObject', params);
     return res.send(JSON.stringify({ signedUrl: url}));
   });
@@ -97,8 +97,7 @@ module.exports = function(app, passport) {
               Bucket: process.env.AWS_S3_BUCKET_NAME,
               Key: req.body.fileName + "." + ext,
               Body: buffer,
-              ContentType: 'image/' + ext,
-              CacheControl: "max-age=1000"
+              ContentType: 'image/' + ext
             }, function(error, response) {
               if(error){
                 throw err;

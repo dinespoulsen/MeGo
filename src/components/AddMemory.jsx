@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../actionCreators';
+import toastr from 'toastr';
 
 export default class AddMemory extends React.Component {
   constructor(props) {
@@ -99,20 +100,18 @@ export default class AddMemory extends React.Component {
       },
       body: JSON.stringify(memory)
     }).then(message => message.json())
-    .then(result => console.log(result));
+    .then(result => this.handleAddResult(result));
   }
 
-  // handleSignupResult(result) {
-  //   if(result.success === true){
-  //     let user = Map({email: this.state.email, id: result.user._id, name: ""});
-  //     this.props.addUser(user);
-  //     this.props.history.push('/users/' + result.user._id);
-  //     toastr.success('Great you signed up!!!!');
-  //   }
-  //   else {
-  //     this.setState({errorMessageEmail: result.message});
-  //   }
-  // }
+  handleAddResult(result) {
+    if(result.success === true){
+      this.props.history.push('/users/' + result.userId);
+      toastr.success('Memory saved!!!!');
+    }
+    else {
+      this.setState({errorMessageEmail: result.message});
+    }
+  }
 
   render() {
     return (
