@@ -1,5 +1,7 @@
 'use strict';
 import routes from './app/routes.js';
+import memoriesRouter from './app/memoriesRouter.js'
+
 import passport from 'passport';
 import configPassport from './config/passport.js';
 import express from 'express';
@@ -11,6 +13,8 @@ import session from 'express-session';
 import configDB from './config/database.js';
 import path from 'path';
 import { Server } from 'http';
+
+
 
 const app = express();
 const server = new Server(app);
@@ -24,10 +28,8 @@ mongoose.connect(configDB.url, function (err, res) {
 });
 
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.static(path.join(__dirname, '/public')))
 app.use('/users', express.static(path.join(__dirname, '/public')))
 app.use('/memories', express.static(path.join(__dirname, '/public')))
@@ -46,7 +48,9 @@ app.use(flash())
 
 const PORT = process.env.PORT || 3000;
 configPassport(passport);
+
 routes(app, passport);
+memoriesRouter(app, passport);
 
 server.listen(PORT, () => {
   console.log(`App listening on port ${PORT}!`);

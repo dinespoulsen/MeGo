@@ -22,6 +22,7 @@ export default class AddMemory extends React.Component {
 
   handleFileSelection(event){
     let file = event.target.files[0];
+    console.log(file);
     var img = new Image;
     let _this = this;
 
@@ -81,9 +82,37 @@ export default class AddMemory extends React.Component {
     })
   }
 
-  handleAddClick(){
-    console.log("clicked");
+  handleAddClick(event){
+    event.preventDefault();
+    let memory = {
+      title: this.state.title,
+      location: this.state.location,
+      description: this.state.description,
+      imageUrl: this.state.imagePreviewUrl
+    }
+
+    fetch("/memories",{
+      method: 'post',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(memory)
+    }).then(message => message.json())
+    .then(result => console.log(result));
   }
+
+  // handleSignupResult(result) {
+  //   if(result.success === true){
+  //     let user = Map({email: this.state.email, id: result.user._id, name: ""});
+  //     this.props.addUser(user);
+  //     this.props.history.push('/users/' + result.user._id);
+  //     toastr.success('Great you signed up!!!!');
+  //   }
+  //   else {
+  //     this.setState({errorMessageEmail: result.message});
+  //   }
+  // }
 
   render() {
     return (
