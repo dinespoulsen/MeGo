@@ -5,6 +5,7 @@ import { Map } from 'immutable';
 import ReactCrop from 'react-image-crop';
 import CropStyles from 'react-image-crop/dist/ReactCrop.css';
 import ConnectedAvatarSaver from './AvatarSaver.jsx'
+import { setPreviewImageUrl } from "../helpers/modelExtensions.js"
 
 class AvatarUpload extends React.Component {
   constructor(props) {
@@ -19,48 +20,9 @@ class AvatarUpload extends React.Component {
   }
 
   handleFileSelection(event){
-    let file = event.target.files[0];
-    var img = new Image;
-
     this.props.isCroppingImage(true);
-    let _this = this;
-
-    img.onload = function() {
-      let canvas = document.createElement('canvas');
-      let ctx = canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0);
-
-      let MAX_WIDTH = 500;
-      let MAX_HEIGHT = 500;
-      let width = img.width;
-      let height = img.height;
-
-      if (width > height) {
-        if (width > MAX_WIDTH) {
-          height *= MAX_WIDTH / width;
-          width = MAX_WIDTH;
-        }
-      } else {
-        if (height > MAX_HEIGHT) {
-          width *= MAX_HEIGHT / height;
-          height = MAX_HEIGHT;
-        }
-      }
-
-      canvas.width = width;
-      canvas.height = height;
-      ctx = canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0, width, height);
-
-      var dataUrl = canvas.toDataURL("image/jpg");
-      _this.setState({
-        imagePreviewUrl: dataUrl
-      })
-    }
-
-    if(file){
-      img.src = URL.createObjectURL(file);
-    }
+    let file = event.target.files[0];
+    setPreviewImageUrl(file, this);
   }
 
   handleImageCrop(crop, pixelCrop){
@@ -68,6 +30,7 @@ class AvatarUpload extends React.Component {
   }
 
   setInitialAvatar(crop, image, pixelCrop){
+
     this.cropImage(crop, pixelCrop);
   }
 

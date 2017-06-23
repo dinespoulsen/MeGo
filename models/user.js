@@ -7,7 +7,8 @@ var userSchema = mongoose.Schema({
         email: String,
         password: String,
         name: String,
-        avatarFileName: String
+        avatarFileName: String,
+        memories : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Memory' }]
     },
     facebook         : {
         id           : String,

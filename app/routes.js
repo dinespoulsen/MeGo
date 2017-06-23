@@ -1,7 +1,6 @@
 import path from 'path';
 import express from'express';
 import s3 from '../config/s3.js'
-import  fs from "fs";
 import User from '../models/user';
 
 module.exports = function(app, passport) {
