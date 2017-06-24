@@ -19,15 +19,26 @@ class EditForm extends React.Component {
 
   render() {
     return (
-      <div className={(!this.props.isEditing || this.props.isEditing === void 0) ? "collapse" : "expand"}>
-        <label>
-          Name:
-          <input type="text" onChange={this.handleNameChange} value={this.props.user.get("name")}/>
-        </label>
-        <label>
-          Email:
-          <input type="text" onChange={this.handleEmailChange} value={this.props.user.get("email")}/>
-        </label>
+      <div className="edit-form-container">
+
+        <div className="edit-form-row">
+          <div className="edit-form-column-label">
+            <label>Name:</label>
+          </div>
+          <div className="edit-form-column-input">
+            <input type="text" onChange={this.handleNameChange} value={this.props.user.get("name")}/>
+          </div>
+        </div>
+
+        <div className="edit-form-row">
+          <div className="edit-form-column-label">
+            <label>Email:</label>
+          </div>
+          <div className="edit-form-column-input">
+            <input type="text" onChange={this.handleEmailChange} value={this.props.user.get("email")}/>
+          </div>
+        </div>
+
       </div>
     );
   }
@@ -35,8 +46,7 @@ class EditForm extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.get("user"),
-    isEditing: state.get("editUser").get("isEditing")
+    user: state.get("user")
    }
 }
 

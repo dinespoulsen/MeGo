@@ -4,6 +4,7 @@ import Header from './Header.jsx';
 import ConnectedAvatarUpload from './AvatarUpload.jsx';
 import ConnectedAvatar from './Avatar.jsx'
 import ConnectedEditUser from './EditUser.jsx';
+import MemoriesList from "./MemoriesList.jsx"
 import * as actionCreators from '../actionCreators';
 import { Map } from 'immutable';
 import { Link } from 'react-router-dom';
@@ -47,18 +48,26 @@ class User extends React.Component {
 
   render() {
     return (
-      <div className="user-info-container">
-        <div>
-          {this.props.user ? <ConnectedAvatar></ConnectedAvatar> : ""}
-          <ConnectedAvatarUpload></ConnectedAvatarUpload>
-        </div>
+      <div>
+        <div className="user-info-container">
+          <div>
+            {this.props.user ? <ConnectedAvatar></ConnectedAvatar> : ""}
+            <ConnectedAvatarUpload></ConnectedAvatarUpload>
+          </div>
 
-        <div>
-          <p>Name: <span>{this.props.user ? this.props.user.get("name") : ""}</span></p>
-          <p>Email: <span>{this.props.user ? this.props.user.get("email") : ""}</span></p>
-          { this.props.user ? <ConnectedEditUser></ConnectedEditUser> : ""}
+          <div>
+            <h3>{this.props.user ? this.props.user.get("name") : ""}</h3>
+            <p><span>{this.props.user ? this.props.user.get("memories").size : ""}</span> memories</p>
+          </div>
+
+          <div>
+            {this.props.user ? <Link id="edit-user-button" to={"/users/" + this.props.user.get("id") + "/edit"}>Edit Profile</Link> : ""}
+          </div>
         </div>
+        
+        {this.props.user ? <MemoriesList memories={this.props.user.get("memories")}></MemoriesList> : ""}
       </div>
+
     );
   }
 }

@@ -79,11 +79,11 @@ export default class AddMemory extends React.Component {
     return (
       <div className="add-memory-container">
 
-        <div className="add-memory-image-row">
+        <div className="add-memory-row">
           { this.state.imagePreviewUrl !== "" ? <img src={this.state.imagePreviewUrl}/> : <img src="MeGo-logo.png"/>}
         </div>
 
-        <div className="add-memory-uploader-row">
+        <div className="add-memory-row">
           <input type="file" onChange={this.handleFileSelection} />
         </div>
 
@@ -115,11 +115,7 @@ export default class AddMemory extends React.Component {
         </div>
 
         <div className="add-memory-row">
-          <div className="add-memory-column-label">
-          </div>
-          <div className="add-memory-column-input">
-            <button onClick={this.handleAddClick}>Add</button>
-          </div>
+          <button onClick={this.handleAddClick}>Add</button>
         </div>
 
       </div>

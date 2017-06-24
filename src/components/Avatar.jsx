@@ -49,7 +49,7 @@ class Avatar extends React.Component {
   render() {
     return (
       <div>
-        {this.props.avatarFileName ? <img src={this.getImageSrc()}/> : <img width="200" src={this.getImageSrc()}/>}
+        {this.props.avatarFileName ? <img id="avatar" src={this.getImageSrc()}/> : <img id="avatar" width="200" src={this.getImageSrc()}/>}
       </div>
     );
   }

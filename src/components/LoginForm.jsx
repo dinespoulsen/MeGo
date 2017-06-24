@@ -2,7 +2,7 @@ import React from 'react';
 import toastr from 'toastr';
 import * as actionCreators from '../actionCreators';
 import {connect} from 'react-redux';
-import { Map } from 'immutable';
+import { Map, List } from 'immutable';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -52,7 +52,12 @@ class LoginForm extends React.Component {
 
   handleLoginResult(result) {
     if(result.success === true){
-      let user = Map({email: this.state.email, id: result.user._id, name: result.user.local.name, avatarFileName: result.user.local.avatarFileName});
+      let user = Map({memories: List(result.user.local.memories),
+                      email: this.state.email,
+                      id: result.user._id,
+                      name: result.user.local.name,
+                      avatarFileName: result.user.local.avatarFileName
+                });
       this.props.addUser(user);
       this.props.history.push('/users/' + result.user._id);
       toastr.success('Great you got logged in!!!!');

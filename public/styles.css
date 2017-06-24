@@ -10,6 +10,21 @@ body {
   color: rgb(20, 31, 31);
 }
 
+h3 {
+  margin-top: 0px;
+}
+
+#edit-user-button {
+  text-decoration: none;
+  background-color: rgb(56, 151, 240);
+  border: solid 1px;
+  border-radius: 4px;
+  color: rgb(255, 255, 255);
+  padding: 0px 8px;
+  font-size: 14px;
+  line-height: 26px;
+}
+
 /*header*/
 
 .header-container {
@@ -35,6 +50,13 @@ body {
   font-family: myFirstFont;
   font-size: 20px;
   text-decoration: none;
+}
+
+/*avatar*/
+
+#avatar {
+  padding: 1px;
+  border: solid 1px rgb(208, 225, 225);
 }
 
 /*forms*/
@@ -84,6 +106,71 @@ body {
   margin: auto;
 }
 
+.user-info-container div {
+  flex: 1;
+}
+
+/*Edit user form*/
+
+.edit-user-container {
+  background-color: rgb(255, 255, 255);
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: auto;
+  border: solid 1px rgb(208, 225, 225);
+  border-radius: 2px;
+  padding: 20px 10px;
+}
+
+.edit-user-container button {
+  background-color: rgb(56, 151, 240);
+  border: solid 1px;
+  border-radius: 4px;
+  color: rgb(255, 255, 255);
+  padding: 0px 8px;
+  font-size: 14px;
+  line-height: 26px;
+}
+
+.edit-form-container {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-form-row {
+  margin-bottom: 10px;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.edit-form-column-label {
+  flex: 1;
+}
+
+.edit-form-column-label label {
+  margin-left: 100px;
+  font-weight: bold;
+}
+
+.edit-form-column-input {
+  margin-bottom: 10px;
+  flex: 2;
+}
+
+.edit-form-column-input input {
+  width: 400px;
+  border: solid 1px;
+  border-color: rgb(208, 225, 225);
+  border-radius: 3px;
+  background-color: rgb(255, 255, 255);
+  padding: 6px 10px;
+}
+
 /*add Memeroy*/
 
 .add-memory-container {
@@ -100,18 +187,6 @@ body {
 
 .add-memory-row {
   display: -webkit-flex;
-  display: flex;
-  flex-direction: row;
-}
-
-.add-memory-image-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-
-.add-memory-uploader-row {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -166,7 +241,7 @@ body {
   resize: vertical;
 }
 
-.expand {
+/*.expand {
   height:auto;
   max-height:1000px;
   overflow:hidden;
@@ -186,4 +261,4 @@ body {
   -ms-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
-}
+}*/
