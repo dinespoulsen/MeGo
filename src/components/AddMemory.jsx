@@ -4,7 +4,7 @@ import * as actionCreators from '../actionCreators';
 import toastr from 'toastr';
 import { setPreviewImageUrl } from "../helpers/modelExtensions.js"
 
-export default class AddMemory extends React.Component {
+class AddMemory extends React.Component {
   constructor(props) {
     super(props);
 
@@ -67,6 +67,7 @@ export default class AddMemory extends React.Component {
 
   handleAddResult(result) {
     if(result.success === true){
+      this.props.addMemory(result.memory);
       this.props.history.push('/users/' + result.userId);
       toastr.success('Memory saved!!!!');
     }
@@ -126,3 +127,5 @@ export default class AddMemory extends React.Component {
 function mapStateToProps(state) {
   return { user: state.get("user") }
 }
+
+export default connect(mapStateToProps, actionCreators)(AddMemory)

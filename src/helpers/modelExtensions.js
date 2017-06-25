@@ -1,5 +1,26 @@
+import { Map, List } from 'immutable';
 
-export function uploadImage(s3, fileName, fileExtension, buffer, res) {
+export function populateUserWithMemories(Memory, s3, user, bucketName, res){
+  let updatedUser;
+  Memory.find({ _user: user._id }).
+  exec((err, memories) => {
+      if (err) return handleError(err);
+
+      let updatedMemories = memories.map(memory => {
+        let params = {Bucket: bucketName, Key: memory.filename};
+        let url = s3.getSignedUrl('getObject', params);
+        let memoryObject = Map(memory.toObject());
+        return memoryObject.set("signedUrl", url)
+      })
+
+    updatedUser = Map(user.toObject()).set("memoryObjects", List(updatedMemories));
+
+    return res.send(JSON.stringify({ success: true, message: "", user: updatedUser }));
+  });
+
+}
+
+export function uploadImage(s3, fileName, fileExtension, buffer, res, memory) {
   s3.putObject({
     ACL: 'public-read',
     Bucket: process.env.AWS_S3_BUCKET_NAME,
@@ -12,7 +33,11 @@ export function uploadImage(s3, fileName, fileExtension, buffer, res) {
       throw err;
     }
 
-    return res.send(JSON.stringify({ success: true}));
+    let params = {Bucket: process.env.AWS_S3_BUCKET_NAME, Key: memory.filename};
+    let url = s3.getSignedUrl('getObject', params);
+    let memoryObject = Map(memory.toObject()).set("signedUrl", url);
+
+    return res.send(JSON.stringify({ success: true, memory: memoryObject}));
   });
 }
 

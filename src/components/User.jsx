@@ -2,11 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Header from './Header.jsx';
 import ConnectedAvatarUpload from './AvatarUpload.jsx';
-import ConnectedAvatar from './Avatar.jsx'
-import ConnectedEditUser from './EditUser.jsx';
-import MemoriesList from "./MemoriesList.jsx"
+import ConnectedAvatar from './Avatar.jsx';
+import MemoriesList from "./MemoriesList.jsx";
 import * as actionCreators from '../actionCreators';
-import { Map } from 'immutable';
+import { Map, List } from 'immutable';
 import { Link } from 'react-router-dom';
 
 class User extends React.Component {
@@ -33,7 +32,12 @@ class User extends React.Component {
 
   handleUserResult(result) {
     if(result.success === true){
-      let user = Map({email: result.user.local.email, id: result.user._id, name: result.user.local.name, avatarFileName: result.user.local.avatarFileName});
+      let user = Map({memories: List(result.user.memoryObjects),
+                  email: result.user.local.email,
+                  id: result.user._id,
+                  name: result.user.local.name,
+                  avatarFileName: result.user.local.avatarFileName
+                });
       this.props.addUser(user);
     }
     // handle when failure
@@ -64,7 +68,7 @@ class User extends React.Component {
             {this.props.user ? <Link id="edit-user-button" to={"/users/" + this.props.user.get("id") + "/edit"}>Edit Profile</Link> : ""}
           </div>
         </div>
-        
+
         {this.props.user ? <MemoriesList memories={this.props.user.get("memories")}></MemoriesList> : ""}
       </div>
 

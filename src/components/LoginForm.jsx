@@ -51,8 +51,9 @@ class LoginForm extends React.Component {
   }
 
   handleLoginResult(result) {
+    console.log(result);
     if(result.success === true){
-      let user = Map({memories: List(result.user.local.memories),
+      let user = Map({memories: List(result.user.memoryObjects),
                       email: this.state.email,
                       id: result.user._id,
                       name: result.user.local.name,

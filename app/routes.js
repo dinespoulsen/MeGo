@@ -2,7 +2,9 @@ import path from 'path';
 import express from'express';
 import s3 from '../config/s3.js'
 import User from '../models/user';
-
+import Memory from '../models/memory';
+import { Map, List } from 'immutable';
+import { populateUserWithMemories } from "../src/helpers/modelExtensions.js"
 module.exports = function(app, passport) {
 
   app.get('/', (req, res) => {
@@ -57,7 +59,8 @@ module.exports = function(app, passport) {
         if(loginErr) {
           return next(loginErr);
         }
-          return res.send(JSON.stringify({ success: true, message: info, user: user }));
+
+      populateUserWithMemories(Memory, s3, user, process.env.AWS_S3_BUCKET_NAME, res);
       });
     })(req, res, next);
   });
@@ -110,7 +113,7 @@ module.exports = function(app, passport) {
   });
 
   app.post('/getuserdata', isLoggedIn, function(req, res) {
-    return res.send(JSON.stringify({ success: true, user: req.user }));
+    populateUserWithMemories(Memory, s3, req.user, process.env.AWS_S3_BUCKET_NAME, res);
   });
 
   app.put('/users/:id', function(req, res, next) {
@@ -146,9 +149,9 @@ module.exports = function(app, passport) {
     }
   });
 
-  app.get('*', isLoggedIn, function(req, res) {
-    res.render('index');
-  });
+  // app.get('*', isLoggedIn, function(req, res) {
+  //   res.render('index');
+  // });
 };
 
 function isLoggedIn(req, res, next) {

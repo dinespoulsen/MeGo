@@ -53,3 +53,10 @@ export function isCroppingImage(isCropping) {
     isCropping: isCropping
   };
 }
+
+export function addMemory(memory){
+  return {
+    type: "ADD_MEMORY",
+    memory: memory
+  }
+}

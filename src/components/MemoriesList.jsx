@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as actionCreators from '../actionCreators';
 import { Map } from 'immutable';
 
 export default class MemoriesList extends React.Component {
@@ -9,10 +8,15 @@ export default class MemoriesList extends React.Component {
 
   }
 
+  buildMemory(title, signedUrl, index) {
+    return (<div className="memory-item" key={index}><p>{title}</p><img src={signedUrl}/></div>);
+  }
+
   render() {
-    let memories = this.props.memories.map((memory, index) => <p key={index}>{memory}</p>)
+
+    let memories = this.props.memories !== "" ? this.props.memories.map((memory, index) => this.buildMemory(memory.title, memory.signedUrl, index)) : ""
     return (
-      <div>
+      <div className="memories-container">
         {memories}
       </div>
     );
@@ -23,5 +27,3 @@ function mapStateToProps(state) {
   return {
    }
 }
-
-// export default connect(mapStateToProps, actionCreators)(MemoriesList)

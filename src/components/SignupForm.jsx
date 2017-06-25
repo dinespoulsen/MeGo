@@ -2,7 +2,7 @@ import React from 'react';
 import toastr from 'toastr';
 import * as actionCreators from '../actionCreators';
 import {connect} from 'react-redux'
-import { Map } from 'immutable';
+import { Map, List } from 'immutable';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -48,7 +48,7 @@ class SignupForm extends React.Component {
 
   handleSignupResult(result) {
     if(result.success === true){
-      let user = Map({email: this.state.email, id: result.user._id, name: ""});
+      let user = Map({email: this.state.email, id: result.user._id, name: "", memories: List()});
       this.props.addUser(user);
       this.props.history.push('/users/' + result.user._id);
       toastr.success('Great you signed up!!!!');
@@ -62,7 +62,7 @@ class SignupForm extends React.Component {
     return (
       <div className="form-container">
         <form onSubmit={this.handleSubmit}>
-          
+
           <div>
             {this.state.errorMessageEmail === "" ? "" : <p>{this.state.errorMessageEmail}</p>}
           </div>

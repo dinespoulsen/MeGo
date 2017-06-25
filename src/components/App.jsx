@@ -5,7 +5,7 @@ import connectedSignupForm from './SignupForm.jsx';
 import connectedUser from './User.jsx';
 import connectedEditUserPage from './EditUserPage.jsx';
 import Header from './Header.jsx';
-import AddMemory from './AddMemory.jsx'
+import connectedAddMemory from './AddMemory.jsx'
 
 export default class App extends Component {
   render() {
@@ -20,7 +20,7 @@ export default class App extends Component {
             <Route path='/users/:id/edit' component={connectedEditUserPage} />
             <Route path='/users/:id' component={connectedUser} />
 
-            <Route path='/memories/add' component={AddMemory} />
+            <Route path='/memories/add' component={connectedAddMemory} />
           </Switch>
         </div>
       </Router>

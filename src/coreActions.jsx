@@ -1,7 +1,6 @@
-import { Map } from 'immutable';
+import { Map, List } from 'immutable';
 
 export const addUser = (state, user) => {
-
   let nextState = state.set("user", user);
   return nextState.set("fetchInfo", Map({isFetchSuccess: ""})).set("avatarUrl", "");
 };
@@ -40,4 +39,11 @@ export const saveAvatarSignedUrl = (state, avatarSignedUrl) => {
 
 export const isCropping = (state, isCropping) => {
   return state.set("isCropping", isCropping)
+}
+
+export const addMemory = (state, memory) => {
+  let memories = state.get("user").get("memories");
+  let updatedMemories = memories.push(memory);
+  let updatedUser = state.get("user").set("memories", updatedMemories);
+  return state.set("user", updatedUser);
 }

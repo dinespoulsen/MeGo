@@ -12,7 +12,7 @@ class Avatar extends React.Component {
   }
 
   componentDidMount(){
-    if(this.props.avatarSignedUrl === undefined){
+    if(this.props.avatarSignedUrl === undefined && this.props.avatarFileName){
       return  this.getSignedUrl("mego-images", this.props.avatarFileName);
     }
   }
@@ -49,7 +49,7 @@ class Avatar extends React.Component {
   render() {
     return (
       <div>
-        {this.props.avatarFileName ? <img id="avatar" src={this.getImageSrc()}/> : <img id="avatar" width="200" src={this.getImageSrc()}/>}
+        {this.props.avatarFileName ? <img id="avatar" src={this.getImageSrc()}/> : <img id="avatar" width="200" src="MeGo-logo.png"/>}
       </div>
     );
   }
