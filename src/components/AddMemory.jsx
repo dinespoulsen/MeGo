@@ -2,7 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../actionCreators';
 import toastr from 'toastr';
-import { setPreviewImageUrl } from "../helpers/modelExtensions.js"
+import { setPreviewImageUrl } from "../helpers/modelExtensions.js";
+import Spinner from 'react-spinkit';
+import { Map } from 'immutable';
 
 class AddMemory extends React.Component {
   constructor(props) {
@@ -47,6 +49,8 @@ class AddMemory extends React.Component {
 
   handleAddClick(event){
     event.preventDefault();
+    let fetchInfo = Map({isFetching: true, isFetchSuccess: ""});
+    this.props.fetchData(fetchInfo);
     let memory = {
       title: this.state.title,
       location: this.state.location,
@@ -68,6 +72,8 @@ class AddMemory extends React.Component {
   handleAddResult(result) {
     if(result.success === true){
       this.props.addMemory(result.memory);
+      let fetchInfo = Map({isFetching: false, isFetchSuccess: true});
+      this.props.fetchData(fetchInfo);
       this.props.history.push('/users/' + result.userId);
       toastr.success('Memory saved!!!!');
     }
@@ -116,7 +122,11 @@ class AddMemory extends React.Component {
         </div>
 
         <div className="add-memory-row">
-          <button onClick={this.handleAddClick}>Add</button>
+          {this.props.fetchInfo.get("isFetching") ? (<Spinner name="three-bounce" fadeIn='quarter' />) : ""}
+        </div>
+
+        <div className="add-memory-row">
+          <button disabled={this.props.fetchInfo.get("isFetching")} onClick={this.handleAddClick}>Add</button>
         </div>
 
       </div>
@@ -125,7 +135,10 @@ class AddMemory extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { user: state.get("user") }
+  return {
+    user: state.get("user"),
+    fetchInfo: state.get("fetchInfo")
+   }
 }
 
 export default connect(mapStateToProps, actionCreators)(AddMemory)
