@@ -18,10 +18,15 @@ class Avatar extends React.Component {
   }
 
   getImageSrc(){
-    if(this.props.avatarUrl){
+    if(this.props.avatarUrl !== ""){
       return this.props.avatarUrl;
     }
-    return this.props.avatarSignedUrl;
+    if(this.props.avatarSignedUrl) {
+      return this.props.avatarSignedUrl;
+    }
+    if(!this.props.avatarFileName) {
+      return "MeGo-logo.png";
+    }
   }
 
   getSignedUrl(bucket, key){
@@ -49,7 +54,7 @@ class Avatar extends React.Component {
   render() {
     return (
       <div>
-        {this.props.avatarFileName ? <img id="avatar" src={this.getImageSrc()}/> : <img id="avatar" width="200" src="MeGo-logo.png"/>}
+        <img id="avatar" src={this.getImageSrc()}/>
       </div>
     );
   }

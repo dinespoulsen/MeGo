@@ -26,7 +26,7 @@ class EditForm extends React.Component {
             <label>Name:</label>
           </div>
           <div className="edit-form-column-input">
-            <input type="text" onChange={this.handleNameChange} value={this.props.user.get("name")}/>
+            <input type="text" onChange={this.handleNameChange} value={this.props.user.get("name") || ""}/>
           </div>
         </div>
 
@@ -35,7 +35,7 @@ class EditForm extends React.Component {
             <label>Email:</label>
           </div>
           <div className="edit-form-column-input">
-            <input type="text" onChange={this.handleEmailChange} value={this.props.user.get("email")}/>
+            <input type="text" onChange={this.handleEmailChange} value={this.props.user.get("email") || ""}/>
           </div>
         </div>
 
