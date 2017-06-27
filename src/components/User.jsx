@@ -39,6 +39,7 @@ class User extends React.Component {
                   avatarFileName: result.user.local.avatarFileName
                 });
       this.props.addUser(user);
+      this.props.saveAvatarSignedUrl(result.user.avatarSignedUrl);
     }
     // handle when failure
   }

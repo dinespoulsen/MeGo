@@ -59,6 +59,7 @@ class LoginForm extends React.Component {
                       avatarFileName: result.user.local.avatarFileName
                 });
       this.props.addUser(user);
+      this.props.saveAvatarSignedUrl(result.user.avatarSignedUrl);
       this.props.history.push('/users/' + result.user._id);
       toastr.success('Great you got logged in!!!!');
     }

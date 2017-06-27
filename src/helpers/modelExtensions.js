@@ -1,8 +1,14 @@
 import { Map, List } from 'immutable';
 
+export function addSignedAvatarUrl(s3, user) {
+  let params = {Bucket: process.env.AWS_S3_BUCKET_NAME, Key: user.local.avatarFileName};
+  let url = s3.getSignedUrl('getObject', params);
+  return Map(user.toObject()).set("avatarSignedUrl", url)
+}
+
 export function populateUserWithMemories(Memory, s3, user, bucketName, res){
   let updatedUser;
-  Memory.find({ _user: user._id }).
+  Memory.find({ _user: user.get("_id") }).
   exec((err, memories) => {
       if (err) return handleError(err);
 
@@ -13,7 +19,7 @@ export function populateUserWithMemories(Memory, s3, user, bucketName, res){
         return memoryObject.set("signedUrl", url)
       })
 
-    updatedUser = Map(user.toObject()).set("memoryObjects", List(updatedMemories));
+    updatedUser = user.set("memoryObjects", List(updatedMemories));
 
     return res.send(JSON.stringify({ success: true, message: "", user: updatedUser }));
   });

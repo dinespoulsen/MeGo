@@ -4,7 +4,7 @@ import s3 from '../config/s3.js'
 import User from '../models/user';
 import Memory from '../models/memory';
 import { Map, List } from 'immutable';
-import { populateUserWithMemories } from "../src/helpers/modelExtensions.js"
+import { populateUserWithMemories, addSignedAvatarUrl } from "../src/helpers/modelExtensions.js"
 module.exports = function(app, passport) {
 
   app.get('/', (req, res) => {
@@ -60,7 +60,12 @@ module.exports = function(app, passport) {
           return next(loginErr);
         }
 
-      populateUserWithMemories(Memory, s3, user, process.env.AWS_S3_BUCKET_NAME, res);
+      let updatedUser;
+      if(user.local.avatarFileName) {
+        updatedUser = addSignedAvatarUrl(s3, user);
+      }
+
+      populateUserWithMemories(Memory, s3, updatedUser, process.env.AWS_S3_BUCKET_NAME, res);
       });
     })(req, res, next);
   });
@@ -113,7 +118,24 @@ module.exports = function(app, passport) {
   });
 
   app.post('/getuserdata', isLoggedIn, function(req, res) {
-    populateUserWithMemories(Memory, s3, req.user, process.env.AWS_S3_BUCKET_NAME, res);
+
+    User.findOne({ '_id' :  req.user._id }, function(err, user) {
+        if (err) {
+          throw err;
+        }
+        if (!user) {
+          return res.send(JSON.stringify({ success: false}));
+        }
+
+        let updatedUser;
+        if(user.local.avatarFileName) {
+          updatedUser = addSignedAvatarUrl(s3, user);
+        }
+
+        populateUserWithMemories(Memory, s3, updatedUser, process.env.AWS_S3_BUCKET_NAME, res);
+    });
+
+
   });
 
   app.put('/users/:id', function(req, res, next) {
