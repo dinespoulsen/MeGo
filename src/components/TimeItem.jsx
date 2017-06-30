@@ -15,7 +15,8 @@ export default class TimeItem extends React.Component {
           <img src={this.props.signedUrl}/>
         </div>
         <div>
-          <p><span>{this.props.createdAt} - </span>{this.props.title}</p>
+          <p className="item-date">{this.props.createdAt}</p>
+          <p>{this.props.title}</p>
           <p>{this.props.description}</p>
         </div>
       </div>

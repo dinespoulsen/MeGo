@@ -14,6 +14,10 @@ h3 {
   margin-top: 0px;
 }
 
+p {
+  margin: 0px;
+}
+
 #edit-user-button {
   text-decoration: none;
   background-color: rgb(56, 151, 240);
@@ -109,6 +113,7 @@ h3 {
   display: flex;
   flex-direction: row;
   border-bottom: solid 1px rgb(208, 225, 225);
+  margin-bottom: 10px;
 }
 
 .time-item-row:hover {
@@ -128,6 +133,10 @@ h3 {
 .item-image img {
   margin: auto;
   height: 100%;
+}
+
+.item-date {
+  font-size: 10px;
 }
 
 /*user info*/
