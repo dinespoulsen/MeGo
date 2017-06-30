@@ -34,7 +34,6 @@ class AvatarSaver extends React.Component {
   handleUploadResult(result){
     if(result){
       console.log("upload was success");
-      return this.props.saveAvatarPreview("");
     }
   }
 

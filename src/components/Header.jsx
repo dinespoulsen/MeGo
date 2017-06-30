@@ -18,6 +18,8 @@ class Header extends React.Component {
   onClickHandler(){
     let fetchInfo = Map({isFetching: false, isFetchSuccess: ""});
     this.props.fetchData(fetchInfo);
+    this.props.saveAvatarPreview("");
+    this.props.isCroppingImage(false);
   }
 
   render() {
@@ -25,12 +27,15 @@ class Header extends React.Component {
     let loginLogoutLink = this.isLoggedIn() ? <a href="/logout" className="header-link">LOGOUT</a> : (<Link to="/login" className="header-link">LOGIN</Link>);
     let profileLink = this.isLoggedIn() ? <Link to={"/users/" + this.props.user.get("id") } onClick={this.onClickHandler} className="header-link">PROFILE</Link> : <Link to="/" className="header-link">SIGNUP</Link>;
     let addMemoryLink = this.isLoggedIn() ? <Link to="/memories/add" id="add-memory">&#x4c;</Link> : "";
+    let timeLink = this.isLoggedIn() ? <Link to="/time" onClick={this.onClickHandler} className="header-link">TIME</Link> : "";
     return (
       <header className="header-container">
 
         { addMemoryLink }
         { profileLink }
+        { timeLink }
         { loginLogoutLink }
+
 
       </header>
     );

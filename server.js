@@ -1,6 +1,7 @@
 'use strict';
 import routes from './app/routes.js';
 import memoriesRouter from './app/memoriesRouter.js'
+import timeRouter from './app/timeRouter.js'
 
 import passport from 'passport';
 import configPassport from './config/passport.js';
@@ -51,6 +52,7 @@ configPassport(passport);
 
 routes(app, passport);
 memoriesRouter(app, passport);
+timeRouter(app, passport);
 
 server.listen(PORT, () => {
   console.log(`App listening on port ${PORT}!`);

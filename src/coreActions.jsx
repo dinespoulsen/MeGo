@@ -2,7 +2,7 @@ import { Map, List } from 'immutable';
 
 export const addUser = (state, user) => {
   let nextState = state.set("user", user);
-  return nextState.set("fetchInfo", Map({isFetchSuccess: ""})).set("avatarUrl", "");
+  return nextState.set("fetchInfo", Map({isFetching: false, isFetchSuccess: ""})).set("avatarUrl", "");
 };
 
 export const editUser = (state, isEditing) => {

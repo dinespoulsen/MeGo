@@ -33,8 +33,7 @@ h3 {
   justify-content: center;
   align-items: center;
   height: 75px;
-  border-bottom: rgb(208, 225, 225);
-  border-bottom-style: solid;
+  border-bottom: solid 1px rgb(208, 225, 225);
   border-bottom-width: 1px;
   margin-bottom: 30px;
 }
@@ -55,6 +54,7 @@ h3 {
 /*avatar*/
 
 #avatar {
+  max-width: 200px;
   padding: 1px;
   border: solid 1px rgb(208, 225, 225);
 }
@@ -95,6 +95,39 @@ h3 {
 .input-container-button {
   display: flex;
   justify-content: flex-end;
+}
+
+/*TimeLine*/
+
+.time-line-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.time-item-row {
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  border-bottom: solid 1px rgb(208, 225, 225);
+}
+
+.time-item-row:hover {
+  display: flex;
+  flex-direction: row;
+  border-bottom: solid 1px rgb(56, 151, 240);
+}
+
+.item-image {
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+}
+
+.item-image img {
+  margin: auto;
+  height: 100%;
 }
 
 /*user info*/
