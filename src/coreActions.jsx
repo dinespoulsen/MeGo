@@ -41,6 +41,10 @@ export const isCropping = (state, isCropping) => {
   return state.set("isCropping", isCropping)
 }
 
+// export const toggleMenu = (state, isToggleMenu) => {
+//   return state.set("isToggleMenu", isToggleMenu);
+// }
+
 export const addMemory = (state, memory) => {
   let memories = state.get("user").get("memories");
   let updatedMemories = memories.push(memory);

@@ -60,3 +60,10 @@ export function addMemory(memory){
     memory: memory
   }
 }
+
+// export function toggleMenu(isToggleMenu){
+//   return {
+//     type: "TOGGLE_MENU",
+//     isToggleMenu: isToggleMenu
+//   }
+// }

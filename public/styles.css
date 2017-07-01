@@ -53,6 +53,34 @@ p {
   font-family: myFirstFont;
   font-size: 20px;
   text-decoration: none;
+  border: none;
+  padding: none;
+  background: none;
+}
+
+#add-memory:hover {
+  cursor: pointer;
+}
+
+/*add-bar*/
+
+.add-bar-menu {
+  position: absolute;
+  list-style-type: none;
+  padding: 0px;
+  margin: 10px 0px;
+}
+
+.add-bar-menu li {
+  background-color: white;
+  padding: 5px;
+  margin-bottom: 3px;
+  border: solid 1px rgb(208, 225, 225);
+}
+
+.menu-link {
+  color: rgb(20, 31, 31);
+  text-decoration: none;
 }
 
 /*avatar*/

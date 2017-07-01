@@ -6,7 +6,7 @@ import connectedUser from './User.jsx';
 import connectedEditUserPage from './EditUserPage.jsx';
 import Header from './Header.jsx';
 import connectedAddMemory from './AddMemory.jsx'
-import connectedTimeLine from './TimeLine.jsx'
+import connectedTimeLine from './TimeLine.jsx';
 
 export default class App extends Component {
   render() {
