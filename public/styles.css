@@ -64,6 +64,10 @@ p {
 
 /*add-bar*/
 
+.add-bar-container {
+  margin-left: 20px;
+}
+
 .add-bar-menu {
   position: absolute;
   list-style-type: none;
