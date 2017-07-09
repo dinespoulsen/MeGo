@@ -8,7 +8,8 @@ var userSchema = mongoose.Schema({
         password: String,
         name: String,
         avatarFileName: String,
-        memories : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Memory' }]
+        memories : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Memory' }],
+        goals : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Goal' }]
     },
     facebook         : {
         id           : String,

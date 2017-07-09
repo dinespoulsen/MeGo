@@ -5,7 +5,8 @@ import connectedSignupForm from './SignupForm.jsx';
 import connectedUser from './User.jsx';
 import connectedEditUserPage from './EditUserPage.jsx';
 import Header from './Header.jsx';
-import connectedAddMemory from './AddMemory.jsx'
+import connectedAddMemory from './AddMemory.jsx';
+import connectedAddGoal from './AddGoal.jsx';
 import connectedTimeLine from './TimeLine.jsx';
 
 export default class App extends Component {
@@ -23,6 +24,7 @@ export default class App extends Component {
 
             <Route path='/time' component={connectedTimeLine} />
 
+            <Route path='/goals/add' component={connectedAddGoal} />
             <Route path='/memories/add' component={connectedAddMemory} />
           </Switch>
         </div>
