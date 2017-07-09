@@ -3,6 +3,7 @@ import express from'express';
 import s3 from '../config/s3.js'
 import User from '../models/user';
 import Memory from '../models/memory';
+import Goal from '../models/goal';
 import { Map, List } from 'immutable';
 import { populateUserWithMemories, addSignedAvatarUrl } from "../src/helpers/modelExtensions.js"
 module.exports = function(app, passport) {
@@ -65,7 +66,19 @@ module.exports = function(app, passport) {
         updatedUser = addSignedAvatarUrl(s3, user);
       }
 
-      populateUserWithMemories(Memory, s3, updatedUser, process.env.AWS_S3_BUCKET_NAME, res);
+      let myFirstPromise = new Promise((resolve, reject) => {
+        Goal.find({ _user: updatedUser.get("_id") }).
+        exec((err, goals) => {
+            if (err) return handleError(err);
+
+            resolve(updatedUser.set("goalObjects", List(goals)));
+        });
+      })
+
+      myFirstPromise.then(userWithGoals => {
+        populateUserWithMemories(Memory, s3, userWithGoals, process.env.AWS_S3_BUCKET_NAME, res);
+      })
+
       });
     })(req, res, next);
   });

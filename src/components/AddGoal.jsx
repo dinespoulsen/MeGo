@@ -54,12 +54,11 @@ class AddGoal extends React.Component {
 
   handleAddResult(result) {
     if(result.success === true){
-      console.log(result.goal)
-      // this.props.addMemory(result.memory);
+      this.props.addGoal(result.goal);
       let fetchInfo = Map({isFetching: false, isFetchSuccess: true});
       this.props.fetchData(fetchInfo);
-      // this.props.history.push('/users/' + result.userId);
-      // toastr.success('Memory saved!!!!');
+      this.props.history.push('/users/' + result.userId);
+      toastr.success('Goal Added');
     }
     else {
       //

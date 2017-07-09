@@ -41,13 +41,16 @@ export const isCropping = (state, isCropping) => {
   return state.set("isCropping", isCropping)
 }
 
-// export const toggleMenu = (state, isToggleMenu) => {
-//   return state.set("isToggleMenu", isToggleMenu);
-// }
-
 export const addMemory = (state, memory) => {
   let memories = state.get("user").get("memories");
   let updatedMemories = memories.push(memory);
   let updatedUser = state.get("user").set("memories", updatedMemories);
+  return state.set("user", updatedUser);
+}
+
+export const addGoal = (state, goal) => {
+  let goals = state.get("user").get("goals");
+  let updatedGoals = goals.push(goal);
+  let updatedUser = state.get("user").set("goals", updatedGoals);
   return state.set("user", updatedUser);
 }

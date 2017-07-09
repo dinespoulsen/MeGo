@@ -1,4 +1,4 @@
-import {addUser, editUser, editUserEmail, editUserName, fetchData, saveAvatarPreview, saveAvatarSignedUrl, isCropping, addMemory} from "./coreActions.jsx";
+import {addUser, editUser, editUserEmail, editUserName, fetchData, saveAvatarPreview, saveAvatarSignedUrl, isCropping, addMemory, addGoal} from "./coreActions.jsx";
 import { Map } from 'immutable';
 
 export default function reducer(state = Map(), action){
@@ -21,6 +21,8 @@ export default function reducer(state = Map(), action){
       return saveAvatarSignedUrl(state, action.avatarSignedUrl);
     case "ADD_MEMORY":
       return addMemory(state, action.memory);
+    case "ADD_GOAL":
+      return addGoal(state, action.goal);
   }
   return state;
 };

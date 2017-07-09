@@ -61,6 +61,13 @@ export function addMemory(memory){
   }
 }
 
+export function addGoal(goal){
+  return {
+    type: "ADD_GOAL",
+    goal: goal
+  }
+}
+
 // export function toggleMenu(isToggleMenu){
 //   return {
 //     type: "TOGGLE_MENU",
