@@ -171,6 +171,17 @@ p {
   font-size: 10px;
 }
 
+.achieved {
+  color: rgb(208, 225, 225);
+  font-family: myFirstFont;
+  font-size: 32px;
+  margin-top: 8px;
+}
+
+.achieved:hover {
+  cursor: pointer;
+}
+
 /*user info*/
 
 .user-info-container {

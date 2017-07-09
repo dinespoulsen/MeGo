@@ -63,6 +63,7 @@ class User extends React.Component {
           <div>
             <h3>{this.props.user ? this.props.user.get("name") : ""}</h3>
             <p><span>{this.props.user ? this.props.user.get("memories").size : ""}</span> memories</p>
+            <p><span>{this.props.user ? this.props.user.get("goals").size : ""}</span> Goals</p>
           </div>
 
           <div>

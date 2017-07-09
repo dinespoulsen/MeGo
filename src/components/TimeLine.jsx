@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import { Map } from 'immutable';
 import * as actionCreators from '../actionCreators';
 import TimeItem from "./TimeItem.jsx";
+import GoalItem from "./GoalItem.jsx";
 
 class TimeLine extends React.Component {
   constructor(props) {
@@ -16,11 +17,16 @@ class TimeLine extends React.Component {
   }
 
   render() {
-    let sortedMemories = this.props.memories.sort((memoryOne, memoryTwo) => {return new Date(memoryTwo.createdAt) - new Date(memoryOne.createdAt)});
-    let TimeItems = sortedMemories.map((item, index) => { return <TimeItem key={index} signedUrl={item.signedUrl} createdAt={this.formatDate(item.createdAt)} title={item.title} description={item.description}/> })
+    let items = this.props.memories.concat(this.props.goals);
+    let sortedItems = items.sort((itemOne, itemTwo) => {return new Date(itemTwo.createdAt) - new Date(itemOne.createdAt)});
+    let timeItems = sortedItems.map((item, index) => {
+      return item.hasOwnProperty('achieved') ?
+      <GoalItem id={item._id} key={index} createdAt={this.formatDate(item.createdAt)} title={item.title} description={item.description}/> :
+      <TimeItem key={index} signedUrl={item.signedUrl} createdAt={this.formatDate(item.createdAt)} title={item.title} description={item.description}/>
+    })
     return (
       <div className="time-line-container">
-        {TimeItems}
+        {timeItems}
       </div>
     );
   }
@@ -28,7 +34,8 @@ class TimeLine extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    memories: state.get("user").get("memories")
+    memories: state.get("user").get("memories"),
+    goals: state.get("user").get("goals")
    }
 }
 
