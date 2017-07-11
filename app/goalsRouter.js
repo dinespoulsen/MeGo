@@ -33,6 +33,29 @@ module.exports = function(app, passport) {
     });
   });
 
+  app.put('/goals/:id', function(req, res, next) {
+    Goal.findOne({ '_id' :  req.body.id }, function(err, goal) {
+      if (err) {
+        throw err;
+      }
+      if (!goal) {
+        return res.send(JSON.stringify({ success: false}));
+      }
+
+      if(String(goal._user) != String(req.user._id) ){
+        return res.send(JSON.stringify({ success: false}));
+      }
+
+      goal.achieved = req.body.achieved;
+      goal.save(function (err) {
+        if (err) return handleError(err);
+        return res.send(JSON.stringify({ success: true}));
+      });
+
+    });
+
+  });
+
 };
 
 function isLoggedIn(req, res, next) {

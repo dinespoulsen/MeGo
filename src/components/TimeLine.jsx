@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { Map } from 'immutable';
 import * as actionCreators from '../actionCreators';
-import TimeItem from "./TimeItem.jsx";
+import MemoryItem from "./MemoryItem.jsx";
 import GoalItem from "./GoalItem.jsx";
 
 class TimeLine extends React.Component {
@@ -21,8 +21,8 @@ class TimeLine extends React.Component {
     let sortedItems = items.sort((itemOne, itemTwo) => {return new Date(itemTwo.createdAt) - new Date(itemOne.createdAt)});
     let timeItems = sortedItems.map((item, index) => {
       return item.hasOwnProperty('achieved') ?
-      <GoalItem id={item._id} key={index} createdAt={this.formatDate(item.createdAt)} title={item.title} description={item.description}/> :
-      <TimeItem key={index} signedUrl={item.signedUrl} createdAt={this.formatDate(item.createdAt)} title={item.title} description={item.description}/>
+      <GoalItem id={item._id} key={index} achieved={item.achieved} achievedGoal={this.props.achievedGoal} createdAt={this.formatDate(item.createdAt)} title={item.title} description={item.description}/> :
+      <MemoryItem key={index} signedUrl={item.signedUrl} createdAt={this.formatDate(item.createdAt)} title={item.title} description={item.description}/>
     })
     return (
       <div className="time-line-container">

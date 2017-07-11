@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { Map } from 'immutable';
 
-export default class TimeItem extends React.Component {
+export default class MemoryItem extends React.Component {
   constructor(props) {
     super(props);
 

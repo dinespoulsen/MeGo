@@ -54,3 +54,19 @@ export const addGoal = (state, goal) => {
   let updatedUser = state.get("user").set("goals", updatedGoals);
   return state.set("user", updatedUser);
 }
+
+export const achievedGoal = (state, goalObject) => {
+  let goals = state.get("user").get("goals");
+
+  let indexOfGoal = goals.findIndex(goal => goal._id === goalObject.id)
+  
+  let goalToUpdate =goals.filter((goal) => {
+    return goal._id === goalObject.id
+  }).get(0);
+
+  let updatedGoal = Map(goalToUpdate).set("achieved", goalObject.achieved);
+  let updatedGoals = goals.update(indexOfGoal, value => updatedGoal.toJS());
+
+  let updatedUser = state.get("user").set("goals", updatedGoals);
+  return state.set("user", updatedUser);
+}

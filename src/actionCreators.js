@@ -68,9 +68,9 @@ export function addGoal(goal){
   }
 }
 
-// export function toggleMenu(isToggleMenu){
-//   return {
-//     type: "TOGGLE_MENU",
-//     isToggleMenu: isToggleMenu
-//   }
-// }
+export function achievedGoal(goalObject){
+  return {
+    type: "ACHIEVED_GOAL",
+    goalObject: goalObject
+  }
+}

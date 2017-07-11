@@ -171,14 +171,25 @@ p {
   font-size: 10px;
 }
 
-.achieved {
+.achieved-true {
+  color: #20df80;
+  font-family: myFirstFont;
+  font-size: 32px;
+  margin-top: 8px;
+}
+
+.achieved-true:hover {
+  cursor: pointer;
+}
+
+.achieved-false {
   color: rgb(208, 225, 225);
   font-family: myFirstFont;
   font-size: 32px;
   margin-top: 8px;
 }
 
-.achieved:hover {
+.achieved-false:hover {
   cursor: pointer;
 }
 
