@@ -1,11 +1,13 @@
 import path from 'path';
 import express from'express';
-import s3 from '../config/s3.js'
+import s3 from '../config/s3.js';
 import User from '../models/user';
-import Memory from '../models/memory';
 import Goal from '../models/goal';
+import Memory from '../models/memory';
 import { Map, List } from 'immutable';
-import { populateUserWithMemories, addSignedAvatarUrl } from "../src/helpers/modelExtensions.js"
+import { populateUserWithMemories, addSignedAvatarUrl } from "../src/helpers/modelExtensions.js";
+import { isLoggedIn, isLoggedInUser } from "./routerHelpers.js";
+
 module.exports = function(app, passport) {
 
   app.get('/', (req, res) => {
@@ -66,7 +68,7 @@ module.exports = function(app, passport) {
         updatedUser = addSignedAvatarUrl(s3, user);
       }
 
-      let myFirstPromise = new Promise((resolve, reject) => {
+      let populateUserWithGoals = new Promise((resolve, reject) => {
         Goal.find({ _user: updatedUser.get("_id") }).
         exec((err, goals) => {
             if (err) return handleError(err);
@@ -75,7 +77,7 @@ module.exports = function(app, passport) {
         });
       })
 
-      myFirstPromise.then(userWithGoals => {
+      populateUserWithGoals.then(userWithGoals => {
         populateUserWithMemories(Memory, s3, userWithGoals, process.env.AWS_S3_BUCKET_NAME, res);
       })
 
@@ -130,69 +132,7 @@ module.exports = function(app, passport) {
 
   });
 
-  app.post('/getuserdata', isLoggedIn, function(req, res) {
-
-    User.findOne({ '_id' :  req.user._id }, function(err, user) {
-        if (err) {
-          throw err;
-        }
-        if (!user) {
-          return res.send(JSON.stringify({ success: false}));
-        }
-
-        let updatedUser;
-        if(user.local.avatarFileName) {
-          updatedUser = addSignedAvatarUrl(s3, user);
-        }
-
-        populateUserWithMemories(Memory, s3, updatedUser, process.env.AWS_S3_BUCKET_NAME, res);
-    });
-
-
+  app.get('*', isLoggedIn, function(req, res) {
+    res.render('index');
   });
-
-  app.put('/users/:id', function(req, res, next) {
-    passport.authenticate('local-update-user', function(err, user, info) {
-      if (err) {
-        return next(err);
-      }
-
-      if(!user) {
-        return res.send({ success: false, message: info });
-      }
-
-      req.login(user, loginErr => {
-        if(loginErr) {
-          return next(loginErr);
-        }
-          return res.send(JSON.stringify({ success: true, message: info, userId: user.id }));
-      });
-    })(req, res, next);
-  });
-
-  app.get('/users/:id', function(req, res, next) {
-    if(req.user) {
-      if(req.user.id === req.params.id) {
-        res.render('index');
-      }
-      else {
-        res.redirect('/login');
-      }
-    }
-    else {
-      res.redirect('/login');
-    }
-  });
-
-  // app.get('*', isLoggedIn, function(req, res) {
-  //   res.render('index');
-  // });
 };
-
-function isLoggedIn(req, res, next) {
-
-    if (req.isAuthenticated()){
-      return next();
-    }
-    res.redirect('/login');
-}

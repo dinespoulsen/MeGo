@@ -3,6 +3,7 @@ import Memory from '../models/memory';
 import s3 from '../config/s3.js';
 import { uploadImage } from "../src/helpers/modelExtensions.js";
 import { Map } from 'immutable';
+import { isLoggedIn } from "./routerHelpers.js";
 
 module.exports = function(app, passport) {
 
@@ -45,11 +46,3 @@ module.exports = function(app, passport) {
   });
 
 };
-
-function isLoggedIn(req, res, next) {
-
-    if (req.isAuthenticated()){
-      return next();
-    }
-    res.redirect('/login');
-}

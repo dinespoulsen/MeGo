@@ -38,7 +38,7 @@ class Header extends React.Component {
   render() {
 
     let loginLogoutLink = this.isLoggedIn() ? <a href="/logout" className="header-link">LOGOUT</a> : (<Link to="/login" className="header-link">LOGIN</Link>);
-    let profileLink = this.isLoggedIn() ? <Link to={"/users/" + this.props.user.get("id") } onClick={this.onClickHandler} className="header-link">PROFILE</Link> : <Link to="/" className="header-link">SIGNUP</Link>;
+    let profileLink = this.isLoggedIn() ? <Link to={"/users/" + this.props.user.get("id") } onClick={this.onClickHandler} className="header-link">PROFILE</Link> : <Link to="/signup" className="header-link">SIGNUP</Link>;
     let toggleMenuLink = this.isLoggedIn() ? <button onClick={this.handleOnClickToggle} id="add-memory">&#x4c;</button> : "";
     let timeLink = this.isLoggedIn() ? <Link to="/time" onClick={this.onClickHandler} className="header-link">TIME</Link> : "";
     return (

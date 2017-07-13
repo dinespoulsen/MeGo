@@ -1,6 +1,7 @@
 import User from '../models/user';
 import Goal from '../models/goal';
 import s3 from '../config/s3.js';
+import { isLoggedIn } from "./routerHelpers.js";
 
 module.exports = function(app, passport) {
 
@@ -42,7 +43,7 @@ module.exports = function(app, passport) {
         return res.send(JSON.stringify({ success: false}));
       }
 
-      if(String(goal._user) != String(req.user._id) ){
+      if(String(goal._user) !== String(req.user._id) ){
         return res.send(JSON.stringify({ success: false}));
       }
 
@@ -57,11 +58,3 @@ module.exports = function(app, passport) {
   });
 
 };
-
-function isLoggedIn(req, res, next) {
-
-    if (req.isAuthenticated()){
-      return next();
-    }
-    res.redirect('/login');
-}

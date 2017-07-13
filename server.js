@@ -3,6 +3,7 @@ import routes from './app/routes.js';
 import memoriesRouter from './app/memoriesRouter.js';
 import timeRouter from './app/timeRouter.js';
 import goalsRouter from './app/goalsRouter.js';
+import usersRouter from './app/usersRouter.js';
 
 import passport from 'passport';
 import configPassport from './config/passport.js';
@@ -15,7 +16,6 @@ import session from 'express-session';
 import configDB from './config/database.js';
 import path from 'path';
 import { Server } from 'http';
-
 
 
 const app = express();
@@ -51,10 +51,12 @@ app.use(flash())
 const PORT = process.env.PORT || 3000;
 configPassport(passport);
 
-routes(app, passport);
+
 memoriesRouter(app, passport);
 timeRouter(app, passport);
 goalsRouter(app, passport);
+usersRouter(app, passport);
+routes(app, passport);
 
 server.listen(PORT, () => {
   console.log(`App listening on port ${PORT}!`);

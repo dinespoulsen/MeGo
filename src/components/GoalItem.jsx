@@ -38,7 +38,7 @@ export default class GoalItem extends React.Component {
   }
 
   handleAchievedResult(result){
-    console.log(result);
+    // console.log(result);
   }
 
   render() {

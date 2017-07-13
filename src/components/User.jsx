@@ -20,7 +20,7 @@ class User extends React.Component {
       let signin_url = '/getuserdata';
 
       fetch(signin_url,{
-        method: 'post',
+        method: 'get',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
@@ -33,6 +33,7 @@ class User extends React.Component {
   handleUserResult(result) {
     if(result.success === true){
       let user = Map({memories: List(result.user.memoryObjects),
+                  goals: List(result.user.goalObjects),
                   email: result.user.local.email,
                   id: result.user._id,
                   name: result.user.local.name,
