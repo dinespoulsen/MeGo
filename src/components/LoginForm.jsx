@@ -3,6 +3,8 @@ import toastr from 'toastr';
 import * as actionCreators from '../actionCreators';
 import {connect} from 'react-redux';
 import { Map, List } from 'immutable';
+import Footer from './Footer.jsx';
+import { Link } from 'react-router-dom';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -62,7 +64,6 @@ class LoginForm extends React.Component {
       this.props.addUser(user);
       this.props.saveAvatarSignedUrl(result.user.avatarSignedUrl);
       this.props.history.push('/users/' + result.user._id);
-      toastr.success('Great you got logged in!!!!');
     }
     else {
       let emailMessage = result.message.email ? result.message.email : '';
@@ -83,32 +84,39 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div className="form-container">
-        <form onSubmit={this.handleSubmit}>
+      <div id="frontpage-body">
+        <div className="form-container">
+          <h2 className="form-title">Login to see more</h2>
+          <form onSubmit={this.handleSubmit}>
 
-          <div>
-            {this.state.errorMessageEmail === "" ? "" : <p>{this.state.errorMessageEmail}</p>}
-          </div>
+            <div>
+              {this.state.errorMessageEmail === "" ? "" : <p>{this.state.errorMessageEmail}</p>}
+            </div>
 
-          <div className="input-container">
-            <label>Email:</label>
-            <input type="email" name="email" value={this.state.email} onChange={this.handleEmailChange}/>
-          </div>
+            <div className="input-container">
+              <input type="email" name="email" value={this.state.email} onChange={this.handleEmailChange} placeholder={"Email"}/>
+            </div>
 
-          <div>
-            {this.state.errorMessagePassword === "" ? "" : <p>{this.state.errorMessagePassword}</p>}
-          </div>
+            <div>
+              {this.state.errorMessagePassword === "" ? "" : <p>{this.state.errorMessagePassword}</p>}
+            </div>
 
-          <div className="input-container">
-            <label>Password:</label>
-            <input type="password" name="password" value={this.state.password} onChange={this.handlePasswordChange}/>
-          </div>
+            <div className="input-container">
+              <input type="password" name="password" value={this.state.password} onChange={this.handlePasswordChange} placeholder={"Password"}/>
+            </div>
 
-          <div className="input-container">
-            <input type="submit" value="Login" />
-          </div>
+            <div className="input-container">
+              <input type="submit" value="Login" />
+            </div>
 
-        </form>
+            <div className="input-container">
+              <p className="form-bottom-text">Not on Mego yet? <Link className="form-bottom-text-link" to="/">Signup</Link></p>
+            </div>
+
+          </form>
+        </div>
+
+        <Footer/>
       </div>
     );
   }
