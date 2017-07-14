@@ -11,7 +11,7 @@ class SignupForm extends React.Component {
                   email: '',
                   password: '',
                   errorMessageEmail: ''
-                };
+              };
     this.handleSignupResult = this.handleSignupResult.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -61,6 +61,7 @@ class SignupForm extends React.Component {
   render() {
     return (
       <div className="form-container">
+        <h2 className="form-title">Wellcome to Mego</h2>
         <form onSubmit={this.handleSubmit}>
 
           <div>
@@ -68,17 +69,19 @@ class SignupForm extends React.Component {
           </div>
 
           <div className="input-container">
-            <label >Email:</label>
-            <input type="email" name="email" value={this.state.email} onChange={this.handleEmailChange}/>
+            <input type="email" name="email" value={this.state.email} onChange={this.handleEmailChange} placeholder="Email"/>
           </div>
 
           <div className="input-container">
-            <label>Password:</label>
-            <input type="password" name="password" value={this.state.password} onChange={this.handlePasswordChange}/>
+            <input type="password" name="password" value={this.state.password} onChange={this.handlePasswordChange} placeholder="Password"/>
           </div>
 
-          <div className="input-container-button">
-            <input type="submit" value="Submit"/>
+          <div className="input-container">
+            <input type="submit" value="Signup"/>
+          </div>
+
+          <div className="input-container">
+            <p className="form-bottom-text">A placeholder for text and a link for the policies of mego when signing up</p>
           </div>
 
         </form>
