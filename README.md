@@ -10,6 +10,8 @@ I had previously only done an application with user authentication using ruby on
 
 I wanted to understand some of the technologies used for adding scalability to you application and I have therefore experimented with docker and the aws EC2 service throughout this project. Whenever the project is built a new docker image is created and stored in a docker repository. I have used this image to install an instance of the application on an EC2 instance.
 
+Check a demonstration of the app at https://mymegoapp.herokuapp.com.
+
 ## User Stories
 
 ```
@@ -46,3 +48,4 @@ Clone the git repository and run npm install.
 * AWS EC2
 * Webpack & Babel
 * Immutable.js
+* MongoDB/Mongoose
