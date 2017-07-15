@@ -23,9 +23,7 @@ class Avatar extends React.Component {
 
   render() {
     return (
-      <div>
-        <img id="avatar" src={this.getImageSrc()}/>
-      </div>
+      <img id="avatar" src={this.getImageSrc()}/>
     );
   }
 }

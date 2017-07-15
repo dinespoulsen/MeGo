@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Header from './Header.jsx';
-import ConnectedAvatarUpload from './AvatarUpload.jsx';
 import ConnectedAvatar from './Avatar.jsx';
 import MemoriesList from "./MemoriesList.jsx";
 import * as actionCreators from '../actionCreators';
@@ -58,7 +57,6 @@ class User extends React.Component {
         <div className="user-info-container">
           <div>
             {this.props.user ? <ConnectedAvatar></ConnectedAvatar> : ""}
-            <ConnectedAvatarUpload></ConnectedAvatarUpload>
           </div>
 
           <div>

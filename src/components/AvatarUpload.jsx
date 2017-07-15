@@ -54,11 +54,13 @@ class AvatarUpload extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.props.isCropping !== true ? <input type="file" onChange={this.handleFileSelection} /> : <ConnectedAvatarSaver></ConnectedAvatarSaver>}
-        <div>
-          {this.props.isCropping === true ? <ReactCrop src={this.state.imagePreviewUrl} onImageLoaded={this.setInitialAvatar} onChange={this.handleImageCrop} crop={{x: 10, y: 10, width: 60, aspect: 1/1}} /> : ""}
-        </div>
+      <div className="file-holder">
+        {this.props.isCropping === true ? <ReactCrop src={this.state.imagePreviewUrl} onImageLoaded={this.setInitialAvatar} onChange={this.handleImageCrop} crop={{x: 10, y: 10, width: 60, aspect: 1/1}} /> : ""}
+
+        {this.props.isCropping !== true ?
+          (<div><input type="file" id="file" className="inputfile" onChange={this.handleFileSelection} /><label htmlFor="file">Choose a file</label></div>) :
+          <ConnectedAvatarSaver></ConnectedAvatarSaver>
+        }
       </div>
     );
   }

@@ -1,10 +1,11 @@
 export function isLoggedInUser(req, res, next) {
+
   if(req.isAuthenticated()) {
     if(req.user.id === req.params.id) {
-      res.render('index');
+      return next();
     }
     else {
-      return next();
+      res.render('index');
     }
   }
   else {

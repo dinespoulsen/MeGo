@@ -84,48 +84,47 @@ class AddMemory extends React.Component {
 
   render() {
     return (
-      <div className="add-memory-container">
+      <div className="edit-user-container">
 
-        <div className="add-memory-row">
-          { this.state.imagePreviewUrl !== "" ? <img src={this.state.imagePreviewUrl}/> : <img src="MeGo-logo.png"/>}
+        <div className="edit-form-row">
+          { this.state.imagePreviewUrl !== "" ? <img src={this.state.imagePreviewUrl}/> : <img width="275" height="275" src="image-placeholder.png"/>}
         </div>
 
-        <div className="add-memory-row">
-          <input type="file" onChange={this.handleFileSelection} />
+        <div className="edit-form-row">
+          <input type="file" id="file" className="inputfile" onChange={this.handleFileSelection} />
+          <label htmlFor="file">Choose a file</label>
         </div>
 
-        <div className="add-memory-row">
-          <div className="add-memory-column-label">
+        <div className="edit-form-row">
+          <div className="edit-form-column-label">
             <label>Titel:</label>
           </div>
-          <div className="add-memory-column-input">
+          <div className="edit-form-column-input">
             <input type="text" onChange={this.handleTitleChange}/>
           </div>
         </div>
 
-        <div className="add-memory-row">
-          <div className="add-memory-column-label">
+        <div className="edit-form-row">
+          <div className="edit-form-column-label">
             <label>Location:</label>
           </div>
-          <div className="add-memory-column-input">
+          <div className="edit-form-column-input">
             <input type="text" onChange={this.handleLocationChange} />
           </div>
         </div>
 
-        <div className="add-memory-row">
-          <div className="add-memory-column-label">
-            <label>Description:</label>
+        <div className="edit-form-row">
+          <div className="edit-form-column-label">
+            <label>Desc:</label>
           </div>
-          <div className="add-memory-column-input">
+          <div className="edit-form-column-input">
             <textarea onChange={this.handleDescriptionChange} />
           </div>
         </div>
 
-        <div className="add-memory-row">
-          {this.props.fetchInfo.get("isFetching") ? (<Spinner name="three-bounce" fadeIn='quarter' />) : ""}
-        </div>
+          {this.props.fetchInfo.get("isFetching") ? (<div className="edit-form-row"><Spinner name="three-bounce" fadeIn='quarter' /></div>) : ""}
 
-        <div className="add-memory-row">
+        <div className="edit-form-row">
           <button disabled={this.props.fetchInfo.get("isFetching")} onClick={this.handleAddClick}>Add</button>
         </div>
 

@@ -57,7 +57,7 @@ module.exports = function(app, passport) {
   });
 
   app.get('/users/:id', isLoggedInUser, function(req, res, next) {
-    res.redirect('/login');
+    res.render('index');
   });
 
 };

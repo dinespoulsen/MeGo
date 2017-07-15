@@ -4,6 +4,8 @@ import ConnectedEditForm from './EditForm.jsx';
 import * as actionCreators from '../actionCreators';
 import Spinner from 'react-spinkit';
 import { Map } from 'immutable';
+import ConnectedAvatarUpload from './AvatarUpload.jsx';
+import ConnectedAvatar from './Avatar.jsx';
 
 class EditUserPage extends React.Component {
   constructor(props) {
@@ -42,7 +44,6 @@ class EditUserPage extends React.Component {
   }
 
   handleSaveUSerDataResult(result){
-
     if(result.success){
       let fetchInfo = Map({isFetching: false, isFetchSuccess: true});
       return this.props.fetchData(fetchInfo);
@@ -54,19 +55,25 @@ class EditUserPage extends React.Component {
   render() {
     return (
       <div className="edit-user-container">
+
+        <div className="edit-form-row">
+          {this.props.user ? <ConnectedAvatar></ConnectedAvatar> : ""}
+        </div>
+        <div className="edit-form-row">
+          <ConnectedAvatarUpload></ConnectedAvatarUpload>
+        </div>
+
         <ConnectedEditForm></ConnectedEditForm>
+
+        <div className="edit-form-row">
+          <button onClick={this.handleEditClick}>Save</button>
+        </div>
 
         <div className="edit-form-row">
           {this.props.fetchInfo.get("isFetchSuccess") ? <p>Profile Saved</p> : ""}
           {this.props.fetchInfo.get("isFetchSuccess") === false ? <p>Profile could not be saved!</p> : ""}
           {this.props.fetchInfo.get("isFetching") ? (<Spinner name="three-bounce" />) : ""}
         </div>
-
-        <div className="edit-form-row">
-          <button onClick={this.handleEditClick}>Save</button>
-        </div>
-
-
 
       </div>
     );

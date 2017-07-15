@@ -24,7 +24,7 @@ p {
   border: solid 1px;
   border-radius: 4px;
   color: rgb(255, 255, 255);
-  padding: 0px 8px;
+  padding: 6px 10px;
   font-size: 14px;
   line-height: 26px;
 }
@@ -93,7 +93,7 @@ footer {
   height: 75px;
   border-bottom: solid 1px rgb(208, 225, 225);
   border-bottom-width: 1px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .header-link {
@@ -145,8 +145,46 @@ footer {
 
 #avatar {
   max-width: 200px;
-  padding: 1px;
   border: solid 1px rgb(208, 225, 225);
+  margin-bottom: 10px;
+}
+
+#avatar-save-button {
+  margin-bottom: 10px;
+  display: block;
+  width: 100%;
+}
+
+.ReactCrop {
+  margin-bottom: 5px;
+}
+
+/*input file*/
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+  display: block;
+  width: 100%;
+  background-color: rgb(56, 151, 240);
+  border: solid 1px;
+  border-radius: 4px;
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+  line-height: 26px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.file-holder {
+  width: 100%;
 }
 
 /*forms*/
@@ -303,17 +341,17 @@ footer {
 
 .edit-user-container {
   background-color: rgb(255, 255, 255);
-  display: -webkit-flex;
-  display: flex;
+  display: table;
   flex-direction: column;
-  max-width: 800px;
+  min-width: 300px;
   margin: auto;
   border: solid 1px rgb(208, 225, 225);
-  border-radius: 2px;
-  padding: 30px 10px;
+  border-radius: 5px;
+  padding: 80px 50px;
 }
 
 .edit-user-container button {
+  flex: 1;
   background-color: rgb(56, 151, 240);
   border: solid 1px;
   border-radius: 4px;
@@ -324,35 +362,43 @@ footer {
 }
 
 .edit-form-container {
-  display: -webkit-flex;
   display: flex;
   flex-direction: column;
 }
 
 .edit-form-row {
   margin-bottom: 10px;
-  display: -webkit-flex;
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
 .edit-form-column-label {
-  flex: 1;
+  flex: 3;
 }
 
 .edit-form-column-label label {
-  margin-left: 100px;
   font-weight: bold;
 }
 
 .edit-form-column-input {
   margin-bottom: 10px;
-  flex: 2;
+  flex: 7;
 }
 
 .edit-form-column-input input {
-  width: 400px;
+  width: 85%;
+  border: solid 1px;
+  border-color: rgb(208, 225, 225);
+  border-radius: 3px;
+  background-color: rgb(255, 255, 255);
+  padding: 6px 10px;
+}
+
+.edit-form-column-input textarea {
+  resize: none;
+  width: 85%;
+  height: 75px;
   border: solid 1px;
   border-color: rgb(208, 225, 225);
   border-radius: 3px;
@@ -363,7 +409,6 @@ footer {
 /*memories list*/
 
 .memories-container {
-  display: -webkit-flex;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

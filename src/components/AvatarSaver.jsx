@@ -13,6 +13,7 @@ class AvatarSaver extends React.Component {
 
   handleOnSaveClick(){
     this.props.isCroppingImage(false);
+    this.props.saveAvatarSignedUrl(this.props.avatarUrl);
     let request_object = {
       dataUrl: this.props.avatarUrl,
       fileName: "avatar"
@@ -39,9 +40,7 @@ class AvatarSaver extends React.Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.handleOnSaveClick}>Save</button>
-      </div>
+      <button id="avatar-save-button" onClick={this.handleOnSaveClick}>Save Image</button>
     );
   }
 }
