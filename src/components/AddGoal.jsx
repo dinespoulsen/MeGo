@@ -67,27 +67,27 @@ class AddGoal extends React.Component {
 
   render() {
     return (
-      <div className="edit-user-container">
+      <div className="input-layout-container">
 
-        <div className="edit-form-row">
-          <div className="edit-form-column-label">
+        <div className="input-layout-row">
+          <div className="input-layout-column-label">
             <label>Titel:</label>
           </div>
-          <div className="edit-form-column-input">
+          <div className="input-layout-column-input">
             <input type="text" onChange={this.handleTitleChange}/>
           </div>
         </div>
 
-        <div className="edit-form-row">
-          <div className="edit-form-column-label">
+        <div className="input-layout-row">
+          <div className="input-layout-column-label">
             <label>Desc:</label>
           </div>
-          <div className="edit-form-column-input">
+          <div className="input-layout-column-input">
             <input type="text" onChange={this.handleDescriptionChange}/>
           </div>
         </div>
 
-        <div className="edit-form-row">
+        <div className="input-layout-row">
           <button disabled={this.props.fetchInfo.get("isFetching")} onClick={this.handleAddClick}>Add</button>
         </div>
 

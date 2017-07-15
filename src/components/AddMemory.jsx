@@ -84,47 +84,47 @@ class AddMemory extends React.Component {
 
   render() {
     return (
-      <div className="edit-user-container">
+      <div className="input-layout-container">
 
-        <div className="edit-form-row">
+        <div className="input-layout-row">
           { this.state.imagePreviewUrl !== "" ? <img src={this.state.imagePreviewUrl}/> : <img width="275" height="275" src="image-placeholder.png"/>}
         </div>
 
-        <div className="edit-form-row">
+        <div className="input-layout-row">
           <input type="file" id="file" className="inputfile" onChange={this.handleFileSelection} />
           <label htmlFor="file">Choose a file</label>
         </div>
 
-        <div className="edit-form-row">
-          <div className="edit-form-column-label">
+        <div className="input-layout-row">
+          <div className="input-layout-column-label">
             <label>Titel:</label>
           </div>
-          <div className="edit-form-column-input">
+          <div className="input-layout-column-input">
             <input type="text" onChange={this.handleTitleChange}/>
           </div>
         </div>
 
-        <div className="edit-form-row">
-          <div className="edit-form-column-label">
+        <div className="input-layout-row">
+          <div className="input-layout-column-label">
             <label>Location:</label>
           </div>
-          <div className="edit-form-column-input">
+          <div className="input-layout-column-input">
             <input type="text" onChange={this.handleLocationChange} />
           </div>
         </div>
 
-        <div className="edit-form-row">
-          <div className="edit-form-column-label">
+        <div className="input-layout-row">
+          <div className="input-layout-column-label">
             <label>Desc:</label>
           </div>
-          <div className="edit-form-column-input">
+          <div className="input-layout-column-input">
             <textarea onChange={this.handleDescriptionChange} />
           </div>
         </div>
 
-          {this.props.fetchInfo.get("isFetching") ? (<div className="edit-form-row"><Spinner name="three-bounce" fadeIn='quarter' /></div>) : ""}
+          {this.props.fetchInfo.get("isFetching") ? (<div className="input-layout-row"><Spinner name="three-bounce" fadeIn='quarter' /></div>) : ""}
 
-        <div className="edit-form-row">
+        <div className="input-layout-row">
           <button disabled={this.props.fetchInfo.get("isFetching")} onClick={this.handleAddClick}>Add</button>
         </div>
 

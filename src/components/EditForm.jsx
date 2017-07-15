@@ -21,20 +21,20 @@ class EditForm extends React.Component {
     return (
       <div className="edit-form-container">
 
-        <div className="edit-form-row">
-          <div className="edit-form-column-label">
+        <div className="input-layout-row">
+          <div className="input-layout-column-label">
             <label>Name:</label>
           </div>
-          <div className="edit-form-column-input">
+          <div className="input-layout-column-input">
             <input type="text" onChange={this.handleNameChange} value={this.props.user.get("name") || ""}/>
           </div>
         </div>
 
-        <div className="edit-form-row">
-          <div className="edit-form-column-label">
+        <div className="input-layout-row">
+          <div className="input-layout-column-label">
             <label>Email:</label>
           </div>
-          <div className="edit-form-column-input">
+          <div className="input-layout-column-input">
             <input type="text" onChange={this.handleEmailChange} value={this.props.user.get("email") || ""}/>
           </div>
         </div>

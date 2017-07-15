@@ -54,22 +54,22 @@ class EditUserPage extends React.Component {
 
   render() {
     return (
-      <div className="edit-user-container">
+      <div className="input-layout-container">
 
-        <div className="edit-form-row">
+        <div className="input-layout-row">
           {this.props.user ? <ConnectedAvatar></ConnectedAvatar> : ""}
         </div>
-        <div className="edit-form-row">
+        <div className="input-layout-row">
           <ConnectedAvatarUpload></ConnectedAvatarUpload>
         </div>
 
         <ConnectedEditForm></ConnectedEditForm>
 
-        <div className="edit-form-row">
+        <div className="input-layout-row">
           <button onClick={this.handleEditClick}>Save</button>
         </div>
 
-        <div className="edit-form-row">
+        <div className="input-layout-row">
           {this.props.fetchInfo.get("isFetchSuccess") ? <p>Profile Saved</p> : ""}
           {this.props.fetchInfo.get("isFetchSuccess") === false ? <p>Profile could not be saved!</p> : ""}
           {this.props.fetchInfo.get("isFetching") ? (<Spinner name="three-bounce" />) : ""}
