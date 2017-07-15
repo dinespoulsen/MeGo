@@ -67,27 +67,27 @@ class AddGoal extends React.Component {
 
   render() {
     return (
-      <div className="add-memory-container">
+      <div className="edit-user-container">
 
-        <div className="add-memory-row">
-          <div className="add-memory-column-label">
+        <div className="edit-form-row">
+          <div className="edit-form-column-label">
             <label>Titel:</label>
           </div>
-          <div className="add-memory-column-input">
+          <div className="edit-form-column-input">
             <input type="text" onChange={this.handleTitleChange}/>
           </div>
         </div>
 
-        <div className="add-memory-row">
-          <div className="add-memory-column-label">
-            <label>Description:</label>
+        <div className="edit-form-row">
+          <div className="edit-form-column-label">
+            <label>Desc:</label>
           </div>
-          <div className="add-memory-column-input">
+          <div className="edit-form-column-input">
             <input type="text" onChange={this.handleDescriptionChange}/>
           </div>
         </div>
 
-        <div className="add-memory-row">
+        <div className="edit-form-row">
           <button disabled={this.props.fetchInfo.get("isFetching")} onClick={this.handleAddClick}>Add</button>
         </div>
 
