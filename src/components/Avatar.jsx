@@ -17,13 +17,13 @@ class Avatar extends React.Component {
       return this.props.avatarSignedUrl;
     }
     if(!this.props.avatarFileName) {
-      return "MeGo-logo.png";
+      return "../image-placeholder.png";
     }
   }
 
   render() {
     return (
-      <img id="avatar" src={this.getImageSrc()}/>
+      <img id="avatar" width="200" height="200" src={this.getImageSrc()}/>
     );
   }
 }

@@ -32,9 +32,10 @@ mongoose.connect(configDB.url, function (err, res) {
 app.use(cookieParser());
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
-app.use(express.static(path.join(__dirname, '/public')))
-app.use('/users', express.static(path.join(__dirname, '/public')))
-app.use('/memories', express.static(path.join(__dirname, '/public')))
+app.use(express.static(__dirname + '/public'));
+
+app.use("/users", express.static(path.resolve(__dirname, './public')));
+app.use("/memories", express.static(path.resolve(__dirname, './public')));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));

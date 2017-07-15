@@ -53,7 +53,6 @@ module.exports = function(app, passport) {
       if (err) {
         return next(err);
       }
-
       if(!user) {
         return res.send({ success: false, message: info });
       }
@@ -63,17 +62,20 @@ module.exports = function(app, passport) {
           return next(loginErr);
         }
 
-      let updatedUser;
+      let updatedUser = Map(req.user.toObject());
       if(user.local.avatarFileName) {
         updatedUser = addSignedAvatarUrl(s3, user);
       }
 
       let populateUserWithGoals = new Promise((resolve, reject) => {
-        Goal.find({ _user: updatedUser.get("_id") }).
+        Goal.find({ _user: req.user._id }).
         exec((err, goals) => {
             if (err) return handleError(err);
 
-            resolve(updatedUser.set("goalObjects", List(goals)));
+            if(updatedUser){
+              resolve(updatedUser.set("goalObjects", List(goals)));
+            }
+
         });
       })
 
