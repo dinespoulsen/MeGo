@@ -20,12 +20,20 @@ I want to create a user on Mego
 so that I can keep track of my memories and goals
 
 As a user
+I want to edit my profile
+So that I can perosnalize my profile
+
+As a user
 I want to upload images
 so that I can save a memory
 
 As a user
 I want to add a goal
 So that I can manage my personal aspirations
+
+As a user
+I want to be able to mark a goal as achieved
+So that I can manage a goal
 
 ```
 
@@ -48,4 +56,5 @@ Clone the git repository and run npm install.
 * AWS EC2
 * Webpack & Babel
 * Immutable.js
+* Promises 
 * MongoDB/Mongoose
