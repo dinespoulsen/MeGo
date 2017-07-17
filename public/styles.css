@@ -3,11 +3,16 @@
     src: url(./fonts/ElegantIcons.woff);
 }
 
+html {
+    height: 100%;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
   margin: 0px;
   background-color: rgb(251, 251, 251);
   color: rgb(20, 31, 31);
+  min-height: 100%;
 }
 
 h3 {
@@ -31,11 +36,19 @@ p {
 
 /*frontpage*/
 
+#app {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  overflow: scroll;
+}
+
 
 #frontpage-body {
-  padding-top: 20vh;
+  box-sizing: border-box;
+  padding-top: 15%;
   width: 100%;
-  height:80vh;
+  height: 100%;
   font-family: 'Open Sans', sans-serif;
   background: url(background-image.jpg);
   background-size: 1500px;
@@ -430,6 +443,11 @@ footer {
 
 /*add Memeroy*/
 
+.add-memory-image {
+   max-width: 275px;
+   max-height: 275px;
+}
+
 .add-memory-container {
   background-color: rgb(255, 255, 255);
   display: -webkit-flex;
@@ -497,25 +515,3 @@ footer {
   padding: 6px 10px;
   resize: vertical;
 }
-
-/*.expand {
-  height:auto;
-  max-height:1000px;
-  overflow:hidden;
-  -webkit-transition: all 0.5s ease-in;
-  -moz-transition: all 0.5s ease-in;
-  -ms-transition: all 0.5s ease-in;
-  -o-transition: all 0.5s ease-in;
-  transition: all 0.5s ease-in;
-  transition-delay: 0.25s;
-}
-
-.collapse {
-  max-height:0px;
-  overflow:hidden;
-  -webkit-transition: all 0.4s ease-in-out;
-  -moz-transition: all 0.4s ease-in-out;
-  -ms-transition: all 0.4s ease-in-out;
-  -o-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
-}*/

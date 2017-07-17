@@ -87,7 +87,7 @@ class AddMemory extends React.Component {
       <div className="input-layout-container">
 
         <div className="input-layout-row">
-          { this.state.imagePreviewUrl !== "" ? <img src={this.state.imagePreviewUrl}/> : <img width="275" height="275" src="image-placeholder.png"/>}
+          { this.state.imagePreviewUrl !== "" ? <img className="add-memory-image" src={this.state.imagePreviewUrl}/> : <img className="add-memory-image" src="image-placeholder.png"/>}
         </div>
 
         <div className="input-layout-row">
